@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.15)
-project(azro)
+cmake_minimum_required(VERSION 3.25)
+project(azro LANGUAGES CXX)
 
 find_package(SDL3 REQUIRED CONFIG)
 
