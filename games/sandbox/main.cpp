@@ -9,7 +9,7 @@ int main(){
     azro::Window window("azro sandbox", 500, 600);
     
     while(!window.should_close()){
-        window.Poll_events();
+        window.poll_events();
         window.clear(0,250,0);
         window.present();
     }

@@ -9,19 +9,19 @@ struct SDL_Renderer;
 namespace azro{
     class Window{
         public:
-        Window(const std::string& titel, int width, int hight);
+        Window(const std::string& title, int width, int height);
         ~Window();
         Window(const Window&) = delete;
         Window& operator=(const Window&) = delete;
-        void Poll_events();
+        void poll_events();
         bool should_close()const;
         void clear(std::uint8_t r, std::uint8_t g, std::uint8_t b);
         void present();
         private:
-        SDL_Window* window;
-        SDL_Renderer* renderer;
-        uint64_t frame_count = 0;
-        uint64_t last_time = 0;
-        bool quit_requested = false;
+        SDL_Window* window_;
+        SDL_Renderer* renderer_;
+        uint64_t frame_count_ = 0;
+        uint64_t last_time_ = 0;
+        bool quit_requested_ = false;
     };
 }
