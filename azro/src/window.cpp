@@ -28,23 +28,23 @@ void azro::Window::Poll_events(){
     SDL_Event events;
     while(SDL_PollEvent(&events)){
         if(events.type == SDL_EVENT_KEY_DOWN){
-            if(events.key.key == SDL_EVENT_QUIT || events.key.key == SDLK_ESCAPE) should_close();
+            if(events.key.key == SDLK_ESCAPE) should_close();
             if(events.key.key == SDLK_R) clear(250, 0, 0);
             if(events.key.key == SDLK_G) clear(0, 250, 0);
             if(events.key.key == SDLK_B) clear(0, 0, 250);
-        };
-
+        }
+        if(events.type == SDL_EVENT_QUIT) should_close();
     }
 }
 
-bool azro::Window::should_close() const{
-    return !quit_requested;
+bool azro::Window::should_close(){
+    quit_requested = true;
+    return quit_requested;
 }
 
 void azro::Window::clear(std::uint8_t r, std::uint8_t g, std::uint8_t b){
     SDL_SetRenderDrawColor(renderer, r, g, b, 255);
     SDL_RenderClear(renderer);
-    present();
 }
 
 void azro::Window::present(){

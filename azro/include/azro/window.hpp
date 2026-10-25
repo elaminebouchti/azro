@@ -14,7 +14,7 @@ namespace azro{
         Window(const Window&) = delete;
         Window& operator=(const Window&) = delete;
         void Poll_events();
-        bool should_close() const;
+        bool should_close();
         void clear(std::uint8_t r, std::uint8_t g, std::uint8_t b);
         void present();
         private:
