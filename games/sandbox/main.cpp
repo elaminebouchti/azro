@@ -10,7 +10,7 @@ int main(){
     
     while(!window.should_close()){
         window.Poll_events();
-        window.clear(30,30,46);
+        window.clear(0,250,0);
         window.present();
     }
     }catch(const std::exception& e) {std::cerr << e.what(); return 1;}
