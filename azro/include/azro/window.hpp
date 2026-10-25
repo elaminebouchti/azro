@@ -22,5 +22,6 @@ namespace azro{
         SDL_Renderer* renderer;
         uint64_t frame_count = 0;
         uint64_t last_time = 0;
+        bool quit_requested = false;
     };
 }

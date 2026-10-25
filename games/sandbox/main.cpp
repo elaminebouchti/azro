@@ -6,7 +6,7 @@
 int main(){
     try{
     azro::Platform platform;
-    azro::Window window("azro sandbox", 800, 600);
+    azro::Window window("azro sandbox", 500, 600);
     
     while(!window.should_close()){
         window.Poll_events();
