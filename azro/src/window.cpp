@@ -5,7 +5,12 @@
 azro::Window::Window(const std::string& title, int width, int height){
     window = SDL_CreateWindow(title.c_str(), width, height, 0);
     if(!window) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
-    renderer = SDL_CreateRenderer(window, NULL);
+    renderer = SDL_CreateRenderer(window, nullptr);
+    if(!renderer){
+        SDL_DestroyWindow(window);
+        throw std::runtime_error(std::string("renderer creation failed : ") + SDL_GetError());
+
+    }
     SDL_SetRenderVSync(renderer, 1);
 
     // initialize the timer 
