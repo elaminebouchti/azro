@@ -20,8 +20,8 @@ namespace azro{
         private:
         SDL_Window* window_;
         SDL_Renderer* renderer_;
-        uint64_t frame_count_ = 0;
-        uint64_t last_time_ = 0;
+        std::uint64_t frame_count_ = 0;
+        std::uint64_t last_time_ = 0;
         bool quit_requested_ = false;
     };
 }

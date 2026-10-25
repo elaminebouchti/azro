@@ -50,7 +50,7 @@ void azro::Window::clear(std::uint8_t r, std::uint8_t g, std::uint8_t b){
 
 void azro::Window::present(){
     frame_count_++;
-    uint64_t current_time = SDL_GetTicks();
+    std::uint64_t current_time = SDL_GetTicks();
     if(current_time - last_time_ >= 1000){
         float elapsed_sec = static_cast<float>(current_time - last_time_) / 1000.0f;
         float fps = static_cast<float>(frame_count_) / elapsed_sec;
