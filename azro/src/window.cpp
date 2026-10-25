@@ -29,9 +29,6 @@ void azro::Window::Poll_events(){
     while(SDL_PollEvent(&events)){
         if(events.type == SDL_EVENT_KEY_DOWN){
             if(events.key.key == SDLK_ESCAPE) quit_requested = true;
-            if(events.key.key == SDLK_R) clear(250, 0, 0);
-            if(events.key.key == SDLK_G) clear(0, 250, 0);
-            if(events.key.key == SDLK_B) clear(0, 0, 250);
         }
         if(events.type == SDL_EVENT_QUIT) quit_requested = true;
     }
