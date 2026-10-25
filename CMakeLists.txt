@@ -7,3 +7,4 @@ add_library(azro_warnings INTERFACE)
 target_compile_options(azro_warnings INTERFACE -Wall -Wextra -Wpedantic -Wconversion -Wshadow)
 add_subdirectory(azro)
 add_subdirectory(games/sandbox)
+
