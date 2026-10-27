@@ -16,7 +16,7 @@ namespace gl{
     using ClearFn = void(*)(GLbitfield);
     using ClearColorFn = void(*)(GLfloat, GLfloat, GLfloat, GLfloat);
     using ViewportFn = void(*)(GLint, GLint, GLsizei, GLsizei);
-    using GetStringFn = const GLubyte(*)(GLenum);
+    using GetStringFn = const GLubyte*(*)(GLenum);
     extern ClearFn Clear;
     extern ClearColorFn ClearColor;
     extern ViewportFn  Viewport;

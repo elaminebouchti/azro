@@ -14,7 +14,8 @@ azro::Window::Window(const std::string& title, int width, int height){
 
     window_ = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
-    if(!SDL_GL_CreateContext(window_)) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
+    context_ = SDL_GL_CreateContext(window_);
+    if(!context_) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
     if(!SDL_GL_MakeCurrent(window_, context_)) throw std::runtime_error(std::string("window cannot currently be made : ") + SDL_GetError());
     gl::load_functions();
     std::cout << "Version : " << reinterpret_cast<const char*>(gl::GetString(gl::GL_VERSION)) << "\n"
@@ -73,10 +74,10 @@ void azro::Window::present(){
         float fps = static_cast<float>(frame_count_) / elapsed_sec;
 
         std::string title = "azro Engine | FPS: " + std::to_string(static_cast<int>(fps));
-        SDL_GL_SwapWindow(window_);
-        
         // reset for the next second
         frame_count_ = 0;
         last_time_ = current_time;
     }
+    SDL_GL_SwapWindow(window_);
+
 }
