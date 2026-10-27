@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace azro{
+namespace gl{
     
     using GLenum = unsigned int;
     using GLbitfield = unsigned int;
@@ -14,7 +14,7 @@ namespace azro{
     using ClearFn = void(*)(GLbitfield);
     using ClearColorFn = void(*)(GLfloat, GLfloat, GLfloat, GLfloat);
     using ViewportFn = void(*)(GLint, GLint, GLsizei, GLsizei);
-    extern ClearFn Clear;
+    extern ClearFn gl::Clear;
     extern ClearColorFn ClearColor;
     extern ViewportFn Viewport;
 

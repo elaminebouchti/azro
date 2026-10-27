@@ -1,4 +1,5 @@
 #include "azro/window.hpp"
+#include "gl/gl.hpp"
 #include <SDL3/SDL.h>
 #include <stdexcept>
 
@@ -14,6 +15,7 @@ azro::Window::Window(const std::string& title, int width, int height){
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
     if(!SDL_GL_CreateContext(window_)) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
     if(!SDL_GL_MakeCurrent(window_, context_)) throw std::runtime_error(std::string("window cannot currently be made : ") + SDL_GetError());
+    
     SDL_GL_SetSwapInterval(1);
 
 
