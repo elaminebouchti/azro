@@ -7,10 +7,10 @@
 
 azro::Window::Window(const std::string& title, int width, int height){
     // required the wanted Context
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
-    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
-    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3)) std::runtime_error(std::string("Error : Major is not accessable "));
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3)) std::runtime_error(std::string("Error : MInor is not accessable"));
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)) std::runtime_error(("Error : Context Profile Mask or Context profile Core is is not accessable"));
+    if(!SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1)) std::runtime_error(std::string("Error : Dobble Buffer Failed"));
 
     window_ = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
@@ -60,7 +60,7 @@ void azro::Window::clear(std::uint8_t r, std::uint8_t g, std::uint8_t b){
     float gf = static_cast<float>(g) / 255.0f;
     float bf = static_cast<float>(b) / 255.0f;
 
-    gl::ClearColor(rf, gf, bf, 1.0);
+    gl::ClearColor(rf, gf, bf, 1.0f);
     gl::Clear(gl::COLOR_BUFFER_BIT);
 }
 

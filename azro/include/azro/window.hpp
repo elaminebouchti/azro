@@ -4,7 +4,6 @@
 #include <cstdint>
 
 struct SDL_Window;
-struct SDL_Renderer;
 struct SDL_GLContextState;
 
 namespace azro{
