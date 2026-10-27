@@ -7,10 +7,10 @@
 
 azro::Window::Window(const std::string& title, int width, int height){
     // required the wanted Context
-    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3)) std::runtime_error(std::string("Error : Major is not accessable "));
-    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3)) std::runtime_error(std::string("Error : MInor is not accessable"));
-    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)) std::runtime_error(("Error : Context Profile Mask or Context profile Core is is not accessable"));
-    if(!SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1)) std::runtime_error(std::string("Error : Dobble Buffer Failed"));
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3)) throw std::runtime_error(std::string("Error : Major is not accessable "));
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3)) throw std::runtime_error(std::string("Error : MInor is not accessable"));
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)) throw std::runtime_error(("Error : Context Profile Mask or Context profile Core is is not accessable"));
+    if(!SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1)) throw std::runtime_error(std::string("Error : Dobble Buffer Failed"));
 
     window_ = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
@@ -20,7 +20,7 @@ azro::Window::Window(const std::string& title, int width, int height){
     gl::load_functions();
     gl::print();
     gl::Viewport(0, 0, width, height);
-    SDL_GL_SetSwapInterval(1);
+    if(!SDL_GL_SetSwapInterval(1)) std::cerr<<"glSetSweepINtervall failed\n";
 
 
     // initialize the timer 
@@ -73,6 +73,7 @@ void azro::Window::present(){
 
         std::string title = "azro Engine | FPS: " + std::to_string(static_cast<int>(fps));
         // reset for the next second
+        SDL_SetWindowTitle(window_, title.c_str());
         frame_count_ = 0;
         last_time_ = current_time;
     }

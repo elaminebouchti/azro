@@ -22,10 +22,14 @@ void azro::gl::load_functions(){
     if(gl::GetString == nullptr) throw std::runtime_error(std::string("glGetString") + SDL_GetError());
 }
 
-void azro::gl::print(){
-    std::cout << "Version : " << reinterpret_cast<const char*>(gl::GetString(gl::VERSION)) << "\n"
-              << "Vendor : "  << reinterpret_cast<const char*>(gl::GetString(gl::VENDOR)) << "\n"
-              << "Renderer : "  << reinterpret_cast<const char*>(gl::GetString(gl::RENDERER)) << "\n";
+void azro::gl::print_info(){
+    const char* version = reinterpret_cast<const char*>(gl::GetString((gl::VERSION)));
+    if(version == nullptr) std::cout << "Version : unknown"; 
+    const char* vendor = reinterpret_cast<const char*>(gl::GetString(gl::VENDOR));
+    if(vendor == nullptr) std::cout << "Vendor : unknown";
+    const char* renderer = reinterpret_cast<const char*>(gl::GetString(gl::RENDERER));
+    if(renderer == nullptr) std::cout << "Renderer : unknown";
+    std::cout << "Version :" << version << "\nVendor : " << vendor << "\nRenderer : " << renderer <<"\n";
 }
 
 

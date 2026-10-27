@@ -23,7 +23,7 @@ namespace azro::gl{
     extern GetStringFn GetString;
 
     void load_functions();
-    void print();
+    void print_info();
 
 
 }
