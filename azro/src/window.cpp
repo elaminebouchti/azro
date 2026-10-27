@@ -2,6 +2,7 @@
 #include <SDL3/SDL.h>
 #include <stdexcept>
 
+
 azro::Window::Window(const std::string& title, int width, int height){
     // required the wanted Context
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
