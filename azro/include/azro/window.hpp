@@ -5,6 +5,7 @@
 
 struct SDL_Window;
 struct SDL_Renderer;
+struct SDL_GLContextState;
 
 namespace azro{
     class Window{
@@ -18,8 +19,9 @@ namespace azro{
         void clear(std::uint8_t r, std::uint8_t g, std::uint8_t b);
         void present();
         private:
-        SDL_Window* window_;
-        SDL_Renderer* renderer_;
+        SDL_Window* window_ = nullptr;
+        SDL_Renderer* renderer_ = nullptr;
+        SDL_GLContextState* context_ = nullptr;
         std::uint64_t frame_count_ = 0;
         std::uint64_t last_time_ = 0;
         bool quit_requested_ = false;

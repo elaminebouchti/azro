@@ -3,27 +3,30 @@
 #include <stdexcept>
 
 azro::Window::Window(const std::string& title, int width, int height){
-    // requit the wanted Context
+    // required the wanted Context
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 
-    window_ = SDL_CreateWindow(title.c_str(), width, height, 0);
+    window_ = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
-    renderer_ = SDL_CreateRenderer(window_, nullptr);
-    if(!renderer_){
-        SDL_DestroyWindow(window_);
-        throw std::runtime_error(std::string("renderer creation failed : ") + SDL_GetError());
+    if(!SDL_GL_CreateContext(window_)) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
+    if(!SDL_GL_MakeCurrent(window_, context_)) throw std::runtime_error(std::string("window cannot currently be made : ") + SDL_GetError());
+    SDL_GL_SetSwapInterval(1);
 
-    }
-    SDL_SetRenderVSync(renderer_, 1);
 
     // initialize the timer 
     last_time_ = SDL_GetTicks();
 }
 
 azro::Window::~Window(){
+
+    if(context_){
+        SDL_GL_DestroyContext(context_);
+        context_ = nullptr;
+    }
+
     if(renderer_){
         SDL_DestroyRenderer(renderer_);
         renderer_ = nullptr;
@@ -62,7 +65,7 @@ void azro::Window::present(){
         float fps = static_cast<float>(frame_count_) / elapsed_sec;
 
         std::string title = "azro Engine | FPS: " + std::to_string(static_cast<int>(fps));
-        SDL_SetWindowTitle(window_, title.c_str());
+        SDL_GL_SwapWindow(window_);
         
         // reset for the next second
         frame_count_ = 0;

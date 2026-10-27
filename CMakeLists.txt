@@ -8,3 +8,4 @@ target_compile_options(azro_warnings INTERFACE -Wall -Wextra -Wpedantic -Wconver
 add_subdirectory(azro)
 add_subdirectory(games/sandbox)
 
+
