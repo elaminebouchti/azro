@@ -7,10 +7,10 @@
 
 azro::Window::Window(const std::string& title, int width, int height){
     // required the wanted Context
-    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3)) throw std::runtime_error(std::string("Error : Major is not accessable "));
-    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3)) throw std::runtime_error(std::string("Error : MInor is not accessable"));
-    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)) throw std::runtime_error(("Error : Context Profile Mask or Context profile Core is is not accessable"));
-    if(!SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1)) throw std::runtime_error(std::string("Error : Dobble Buffer Failed"));
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3)) throw std::runtime_error("Error : Major is not accessible ");
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3)) throw std::runtime_error("Error : Minor is not accessible");
+    if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)) throw std::runtime_error("Error : Context Profile Mask or Context profile Core is is not accessible");
+    if(!SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1)) throw std::runtime_error("Error : Double Buffer Failed");
 
     window_ = SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL);
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
@@ -18,7 +18,7 @@ azro::Window::Window(const std::string& title, int width, int height){
     if(!context_) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
     if(!SDL_GL_MakeCurrent(window_, context_)) throw std::runtime_error(std::string("window cannot currently be made : ") + SDL_GetError());
     gl::load_functions();
-    gl::print();
+    gl::print_info();
     gl::Viewport(0, 0, width, height);
     if(!SDL_GL_SetSwapInterval(1)) std::cerr<<"glSetSweepINtervall failed\n";
 
