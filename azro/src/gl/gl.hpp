@@ -13,10 +13,10 @@ namespace azro{
     inline constexpr GLenum GL_VERSION = 0x1F02;
     using ClearFn = void(*)(GLbitfield);
     using ClearColorFn = void(*)(GLfloat, GLfloat, GLfloat, GLfloat);
-    using ViewPortFn = void(*)(GLint, GLint, GLsizei, GLsizei);
+    using ViewportFn = void(*)(GLint, GLint, GLsizei, GLsizei);
     extern ClearFn Clear;
     extern ClearColorFn ClearColor;
-    extern ViewPortFn ViewPort;
+    extern ViewportFn Viewport;
 
     void load_functions();
 
