@@ -1,6 +1,7 @@
 #include "gl.hpp"
 #include <SDL3/SDL.h>
 #include <stdexcept>
+#include <iostream>
 
 gl::ClearFn gl::Clear = nullptr;
 gl::ClearColorFn gl::ClearColor = nullptr;
@@ -20,4 +21,11 @@ void gl::load_functions(){
     gl::GetString = reinterpret_cast<gl::GetStringFn>(SDL_GL_GetProcAddress("glGetString"));
     if(gl::GetString == nullptr) throw std::runtime_error(std::string("Get string function cannot be loaded \n"));
 }
+
+void gl::print(){
+    std::cout << "Version : " << reinterpret_cast<const char*>(gl::GetString(gl::GL_VERSION)) << "\n"
+              << "Vendor : "  << reinterpret_cast<const char*>(gl::GetString(gl::GL_VENDOR)) << "\n"
+              << "Renderer : "  << reinterpret_cast<const char*>(gl::GetString(gl::GL_RENDERER)) << "\n";
+}
+
 

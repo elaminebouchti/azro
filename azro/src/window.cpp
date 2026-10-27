@@ -18,9 +18,7 @@ azro::Window::Window(const std::string& title, int width, int height){
     if(!context_) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
     if(!SDL_GL_MakeCurrent(window_, context_)) throw std::runtime_error(std::string("window cannot currently be made : ") + SDL_GetError());
     gl::load_functions();
-    std::cout << "Version : " << reinterpret_cast<const char*>(gl::GetString(gl::GL_VERSION)) << "\n"
-              << "Vendor : "  << reinterpret_cast<const char*>(gl::GetString(gl::GL_VENDOR)) << "\n"
-              << "Renderer : "  << reinterpret_cast<const char*>(gl::GetString(gl::GL_RENDERER)) << "\n";
+    gl::print();
     gl::Viewport(0, 0, width, height);
     SDL_GL_SetSwapInterval(1);
 

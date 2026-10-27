@@ -23,6 +23,7 @@ namespace gl{
     extern GetStringFn GetString;
 
     void load_functions();
+    void print();
 
 
 }
