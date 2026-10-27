@@ -5,15 +5,19 @@
 gl::ClearFn gl::Clear = nullptr;
 gl::ClearColorFn gl::ClearColor = nullptr;
 gl::ViewportFn gl::Viewport = nullptr;
+gl::GetStringFn gl::GetString = nullptr;
 
 void gl::load_functions(){
     gl::Clear = reinterpret_cast<gl::ClearFn>(SDL_GL_GetProcAddress("glClear"));
     if(gl::Clear == nullptr) throw std::runtime_error(std::string("Clear function cannot be loaded ! \n"));
 
     gl::ClearColor = reinterpret_cast<gl::ClearColorFn>(SDL_GL_GetProcAddress("glClearColor"));
-    if(gl::ClearColor) throw std::runtime_error(std::string("clear color function cannot be loaded \n"));
+    if(gl::ClearColor == nullptr) throw std::runtime_error(std::string("clear color function cannot be loaded \n"));
 
     gl::Viewport = reinterpret_cast<gl::ViewportFn>(SDL_GL_GetProcAddress("glViewport"));
-    if(gl::Viewport) throw std::runtime_error(std::string("Viewport function cannot be loaded \n"));
+    if(gl::Viewport == nullptr) throw std::runtime_error(std::string("Viewport function cannot be loaded \n"));
 
+    gl::GetString = reinterpret_cast<gl::GetStringFn>(SDL_GL_GetProcAddress("glGetString"));
+    if(gl::GetString == nullptr) throw std::runtime_error(std::string("Get string function cannot be loaded \n"));
 }
+

@@ -2,6 +2,7 @@
 #include "gl/gl.hpp"
 #include <SDL3/SDL.h>
 #include <stdexcept>
+#include <iostream>
 
 
 azro::Window::Window(const std::string& title, int width, int height){
@@ -15,7 +16,11 @@ azro::Window::Window(const std::string& title, int width, int height){
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
     if(!SDL_GL_CreateContext(window_)) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
     if(!SDL_GL_MakeCurrent(window_, context_)) throw std::runtime_error(std::string("window cannot currently be made : ") + SDL_GetError());
-    
+    gl::load_functions();
+    std::cout << "Version : " << reinterpret_cast<const char*>(gl::GetString(gl::GL_VERSION)) << "\n"
+              << "Vendor : "  << reinterpret_cast<const char*>(gl::GetString(gl::GL_VENDOR)) << "\n"
+              << "Renderer : "  << reinterpret_cast<const char*>(gl::GetString(gl::GL_RENDERER)) << "\n";
+    gl::Viewport(0, 0, width, height);
     SDL_GL_SetSwapInterval(1);
 
 
@@ -28,11 +33,6 @@ azro::Window::~Window(){
     if(context_){
         SDL_GL_DestroyContext(context_);
         context_ = nullptr;
-    }
-
-    if(renderer_){
-        SDL_DestroyRenderer(renderer_);
-        renderer_ = nullptr;
     }
 
     if(window_){
@@ -56,8 +56,13 @@ bool azro::Window::should_close()const{
 }
 
 void azro::Window::clear(std::uint8_t r, std::uint8_t g, std::uint8_t b){
-    SDL_SetRenderDrawColor(renderer_, r, g, b, 255);
-    SDL_RenderClear(renderer_);
+    // converting the color value to values between 0 and 1
+    float rf = static_cast<float>(r) / 255.0f;
+    float gf = static_cast<float>(g) / 255.0f;
+    float bf = static_cast<float>(b) / 255.0f;
+
+    gl::ClearColor(rf, gf, bf, 1.0);
+    gl::Clear(gl::COLOR_BUFFER_BIT);
 }
 
 void azro::Window::present(){
@@ -74,5 +79,4 @@ void azro::Window::present(){
         frame_count_ = 0;
         last_time_ = current_time;
     }
-    SDL_RenderPresent(renderer_);
 }

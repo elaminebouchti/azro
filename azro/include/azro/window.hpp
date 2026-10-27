@@ -20,7 +20,6 @@ namespace azro{
         void present();
         private:
         SDL_Window* window_ = nullptr;
-        SDL_Renderer* renderer_ = nullptr;
         SDL_GLContextState* context_ = nullptr;
         std::uint64_t frame_count_ = 0;
         std::uint64_t last_time_ = 0;

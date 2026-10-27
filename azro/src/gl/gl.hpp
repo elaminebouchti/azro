@@ -11,14 +11,18 @@ namespace gl{
     using GLubyte = uint8_t;
     inline constexpr GLenum COLOR_BUFFER_BIT = 0x00004000;
     inline constexpr GLenum GL_VERSION = 0x1F02;
+    inline constexpr GLenum GL_VENDOR = 0x1F00;
+    inline constexpr GLenum GL_RENDERER = 0x1F01;
     using ClearFn = void(*)(GLbitfield);
     using ClearColorFn = void(*)(GLfloat, GLfloat, GLfloat, GLfloat);
     using ViewportFn = void(*)(GLint, GLint, GLsizei, GLsizei);
-    extern ClearFn gl::Clear;
+    using GetStringFn = const GLubyte(*)(GLenum);
+    extern ClearFn Clear;
     extern ClearColorFn ClearColor;
-    extern ViewportFn Viewport;
+    extern ViewportFn  Viewport;
+    extern GetStringFn GetString;
 
     void load_functions();
 
-    
+
 }
