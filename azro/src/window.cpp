@@ -3,6 +3,12 @@
 #include <stdexcept>
 
 azro::Window::Window(const std::string& title, int width, int height){
+    // requit the wanted Context
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+    SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+    SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+
     window_ = SDL_CreateWindow(title.c_str(), width, height, 0);
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
     renderer_ = SDL_CreateRenderer(window_, nullptr);
