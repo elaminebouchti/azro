@@ -5,12 +5,12 @@
 #include <iostream>
 
 
-void azro::SDL_WindowDeleter::operator()(SDL_Window* window_) const{
-    if(window_) SDL_DestroyWindow(window_);
+void azro::SDL_WindowDeleter::operator()(SDL_Window* window) const{
+    SDL_DestroyWindow(window);
 }
 
-void azro::SDL_GLContextStateDeleter::operator()(SDL_GLContextState* context_)const{
-    if(context_) SDL_GL_DestroyContext(context_);
+void azro::SDL_GLContextStateDeleter::operator()(SDL_GLContextState* context)const{
+    SDL_GL_DestroyContext(context);
 }
 
 azro::Window::Window(const std::string& title, int width, int height){
@@ -20,7 +20,7 @@ azro::Window::Window(const std::string& title, int width, int height){
     if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)) throw std::runtime_error("Error : Context Profile Mask or Context profile Core is is not accessible");
     if(!SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1)) throw std::runtime_error("Error : Double Buffer Failed");
 
-    window_.reset((SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL)));
+    window_.reset(SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL));
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
     context_.reset(SDL_GL_CreateContext(window_.get()));
     if(!context_) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
@@ -35,8 +35,6 @@ azro::Window::Window(const std::string& title, int width, int height){
     last_time_ = SDL_GetTicks();
 }
 
-azro::Window::~Window(){
-}
 
 void azro::Window::poll_events(){
     SDL_Event events;

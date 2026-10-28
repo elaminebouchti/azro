@@ -10,18 +10,17 @@ struct SDL_GLContextState;
 namespace azro{
 
     struct SDL_WindowDeleter{
-        void operator()(SDL_Window* window_) const;
+        void operator()(SDL_Window* window) const;
     };
     
 
     struct SDL_GLContextStateDeleter{
-        void operator()(SDL_GLContextState* context_) const;
+        void operator()(SDL_GLContextState* context) const;
     };
 
     class Window{
         public:
         Window(const std::string& title, int width, int height);
-        ~Window();
         Window(const Window&) = delete;
         Window& operator=(const Window&) = delete;
         void poll_events();
