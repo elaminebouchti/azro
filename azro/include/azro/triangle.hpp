@@ -4,7 +4,7 @@
 namespace azro{
 class Triangle{
     public:
-    Triangle(const std::array<float, 6>& vertices);
+    Triangle(const std::array<float, 15>& vertices);
 
     ~Triangle();
 
