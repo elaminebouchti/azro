@@ -16,6 +16,20 @@ azro::Triangle::Triangle(std::array<float, 6>& vertices){
 
     azro::gl::EnableVertexAttribArray(0);
 
+    const char* ShaderSource = R"(
+    #version 330 core
+    layout(location = 0) in vec2 a_pos;
+    void main(){
+    gl_Position = vec4(a_pos, 0.0, 1.0);
+    })";
+
+    const char* FragShader = R"(
+    version 330 core
+    out vec4 frag_color;
+
+    void main(){
+    frag_color = vec4(0.0f, 0.5f, 0.0f, 0.0f);
+    })";
 
 
 }
