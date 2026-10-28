@@ -30,6 +30,7 @@ namespace azro::gl{
     inline constexpr GLenum LINK_STATUS = 0x8B82;
     inline constexpr GLenum INFO_LOG_LENGTH = 0x8B84;
     inline constexpr GLenum NO_ERROR = 0;
+    inline constexpr GLenum TRIANGLES = 0x0004;
 
     using ClearFn = void(*)(GLbitfield);
     using ClearColorFn = void(*)(GLfloat, GLfloat, GLfloat, GLfloat);

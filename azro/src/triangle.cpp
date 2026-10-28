@@ -49,10 +49,12 @@ azro::Triangle::Triangle(std::array<float, 6>& vertices){
     create_vertex_shader(VertexShader);
     create_fragement_shader(FragmentShader);
     create_program(VertexShader, FragmentShader);
-
-
 }
 
 azro::Triangle::~Triangle(){}
 
-void azro::Triangle::draw()const{}
+void azro::Triangle::draw()const{
+    azro::gl::UseProgram(program_);
+    azro::gl::BindVertexArray(vao_);
+    azro::gl::DrawArrays(azro::gl::TRIANGLES, 0, 3);
+}
