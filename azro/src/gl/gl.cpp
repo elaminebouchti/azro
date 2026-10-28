@@ -44,14 +44,14 @@ namespace azro::gl{
         if(text == nullptr) return "unknown";
         return text; 
         }
+        template <typename Fn>
+    void load(Fn& out, const char* name){
+        out = reinterpret_cast<Fn>(SDL_GL_GetProcAddress(name));
+        if(out == nullptr) throw std::runtime_error(std::string("failed to load ") + name + SDL_GetError());
+        }
     }
 }
 
-template <typename Fn>
-void azro::gl::load(Fn& out, const char* name){
-    out = reinterpret_cast<Fn>(SDL_GL_GetProcAddress(name));
-    if(out == nullptr) throw std::runtime_error(std::string("failed to load ") + name + SDL_GetError());
-}
 
 void azro::gl::load_functions(){
     

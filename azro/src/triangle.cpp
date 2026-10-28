@@ -2,15 +2,18 @@
 #include <SDL3/SDL.h>
 #include "gl/gl.hpp"
 
-
-unsigned int azro::Triangle::compile_shader(unsigned int type, const char* source){
+namespace azro{
+    namespace{
+unsigned int compile_shader(unsigned int type, const char* source){
     azro::gl::GLuint shader = azro::gl::CreateShader(static_cast<azro::gl::GLuint>(type));
     azro::gl::ShaderSource(shader, 1, &source, nullptr);
     azro::gl::CompileShader(shader);
     return static_cast<azro::gl::GLuint>(shader);
+    }
+}
 }
 
-azro::Triangle::Triangle(std::array<float, 6>& vertices){
+azro::Triangle::Triangle(const std::array<float, 6>& vertices){
     azro::gl::GenVertexArrays(1, &vao_);
     azro::gl::BindVertexArray(vao_);
 
@@ -47,11 +50,13 @@ azro::Triangle::Triangle(std::array<float, 6>& vertices){
 
     azro::gl::DeleteShader(vs);
     azro::gl::DeleteShader(fs);
-
-
 }
 
-azro::Triangle::~Triangle(){}
+azro::Triangle::~Triangle(){
+    azro::gl::DeleteVertexArrays(1, &vao_);
+    azro::gl::DeleteBuffers(1, &vbo_);
+    azro::gl::DeleteProgram(program_);
+}
 
 void azro::Triangle::draw()const{
     azro::gl::UseProgram(program_);

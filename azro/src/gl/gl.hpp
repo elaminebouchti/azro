@@ -12,7 +12,7 @@ namespace azro::gl{
     using GLubyte = unsigned char;
     using GLuint = unsigned int;
     using GLchar = char;
-    using GLboolean = bool;
+    using GLboolean = unsigned char;
     using GLsizeiptr = ptrdiff_t;
     using GLvoid = void;
 
@@ -23,7 +23,7 @@ namespace azro::gl{
     inline constexpr GLenum ARRAY_BUFFER = 0x8892;
     inline constexpr GLenum STATIC_DRAW = 0x88E4;
     inline constexpr GLenum FLOAT = 0x1406;
-    inline constexpr GLenum FALSE = 0;
+    inline constexpr GLboolean FALSE = 0;
     inline constexpr GLenum VERTEX_SHADER = 0x8B31;
     inline constexpr GLenum FRAGMENT_SHADER = 0x8B30;
     inline constexpr GLenum COMPILE_STATUS = 0x8B81;
@@ -59,7 +59,7 @@ namespace azro::gl{
     extern BindVertexArraysFn BindVertexArray;
     extern VertexAttribPointerFn VertexAttribPointer;
     extern EnableVertexAttribArrayFn EnableVertexAttribArray;
-    extern DeleteBuffersFn DeleteVertexArrays;
+    extern DeleteVertexArraysFn DeleteVertexArrays;
 
     using CreateShaderFn = GLuint(*)(GLenum);
     using ShaderSourceFn = void(*)(GLuint, GLsizei, const GLchar**, GLchar*);
@@ -96,9 +96,6 @@ namespace azro::gl{
     extern GetErrorFn GetError;
 
     void load_functions();
-    template <typename Fn>
-    void load(Fn& out, const char* name);
-
     void print_info();
     void check_error(const char* where);
 
