@@ -22,6 +22,9 @@ namespace azro::gl{
     extern GetStringFn GetString;
 
     void load_functions();
+    template <typename Fn>
+    void load(Fn& out, const char* name);
+
     void print_info();
 
 }
