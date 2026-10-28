@@ -5,10 +5,13 @@
 
 
 int main(){
+    std::array<float, 6> vertices = {-0.5f, -0.5f,
+                         0.5f, -0.5f,
+                         0.0f ,  0.5f,};
     try{
         azro::Platform platform;
         azro::Window window("azro sandbox", 800, 600);
-        azro::Triangle triangle();
+        azro::Triangle triangle(vertices);
         
         while(!window.should_close()){
             window.poll_events();

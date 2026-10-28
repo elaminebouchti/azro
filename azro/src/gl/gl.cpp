@@ -9,6 +9,35 @@ azro::gl::ClearColorFn azro::gl::ClearColor = nullptr;
 azro::gl::ViewportFn azro::gl::Viewport = nullptr;
 azro::gl::GetStringFn azro::gl::GetString = nullptr;
 
+azro::gl::GenBuffersFn azro::gl::GenBuffers = nullptr;
+azro::gl::BufferDataFn azro::gl::BufferData = nullptr;
+azro::gl::BindBufferFn azro::gl::BindBuffer = nullptr;
+azro::gl::DeleteBuffersFn azro::gl::DeleteBuffers = nullptr;
+
+azro::gl::GenVertexArrayFn azro::gl::GenVertexArrays = nullptr;
+azro::gl::BindVertexArraysFn azro::gl::BindVertexArray = nullptr;
+azro::gl::VertexAttribPointerFn azro::gl::VertexAttribPointer = nullptr;
+azro::gl::EnableVertexAttribArrayFn azro::gl::EnableVertexAttribArray = nullptr;
+azro::gl::DeleteVertexArraysFn azro::gl::DeleteVertexArrays = nullptr;
+
+azro::gl::CreateShaderFn azro::gl::CreateShader = nullptr;
+azro::gl::ShaderSourceFn azro::gl::ShaderSource = nullptr;
+azro::gl::CompileShaderFn azro::gl::CompileShader = nullptr;
+azro::gl::GetShaderivFn azro::gl::GetShaderiv = nullptr;
+azro::gl::GetShaderInfoLogFn azro::gl::GetShaderInfoLog = nullptr;
+azro::gl::DeleteShaderFn azro::gl::DeleteShader = nullptr;
+
+azro::gl::CreateProgramFn azro::gl::CreateProgram = nullptr;
+azro::gl::AttachShaderFn azro::gl::AttachShader = nullptr;
+azro::gl::LinkProgramFn azro::gl::LinkProgram = nullptr;
+azro::gl::GetProgramivFn azro::gl::GetProgramiv = nullptr;
+azro::gl::GetProgramInfoLogFn azro::gl::GetProgramInfoLog = nullptr;
+azro::gl::UseProgramFn azro::gl::UseProgram = nullptr;
+azro::gl::DeleteProgramFn azro::gl::DeleteProgram = nullptr;
+
+azro::gl::DrawArraysFn azro::gl::DrawArrays = nullptr;
+azro::gl::GetErrorFn azro::gl::GetError = nullptr;
+
 namespace azro::gl{
     namespace {
     const char* or_unknown(const char* text){
@@ -30,6 +59,35 @@ void azro::gl::load_functions(){
     load(gl::ClearColor, "glClearColor");
     load(gl::Viewport, "glViewport");
     load(gl::GetString, "glGetString");
+
+    load(gl::GenBuffers, "glGenBuffers");
+    load(gl::BindBuffer, "glBindBuffer");
+    load(gl::BufferData, "glBufferData");
+    load(gl::DeleteBuffers, "glDeleteBuffers");
+
+    load(gl::GenVertexArrays, "glGenVertexArrays");
+    load(gl::BindVertexArray, "glBindVertexArray");
+    load(gl::VertexAttribPointer, "glVertexAttribPointer");
+    load(gl::EnableVertexAttribArray, "glEnableVertexAttribArray");
+    load(gl::DeleteVertexArrays, "glDeleteVertexArrays");
+
+    load(gl::CreateShader, "glCreateShader");
+    load(gl::ShaderSource, "glShaderSource");
+    load(gl::CompileShader, "glCompileShader");
+    load(gl::GetShaderiv, "glGetShaderiv");
+    load(gl::GetShaderInfoLog, "glGetShaderInfoLog");
+    load(gl::DeleteShader, "glDeleteShader");
+
+    load(gl::CreateProgram, "glCreateProgram");
+    load(gl::AttachShader, "glAttachShader");
+    load(gl::LinkProgram, "glLinkProgram");
+    load(gl::GetProgramiv, "glGetProgramiv");
+    load(gl::GetProgramInfoLog, "glGetPrpgramInfoLog");
+    load(gl::UseProgram, "glUseProgram");
+    load(gl::DeleteProgram, "glDeleteProgram");
+
+    load(gl::DrawArrays, "glDrawArrays");
+    load(gl::GetError, "glGetError");
 }
 
 void azro::gl::print_info(){

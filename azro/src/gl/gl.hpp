@@ -13,7 +13,7 @@ namespace azro::gl{
     using GLuint = unsigned int;
     using GLchar = char;
     using GLboolean = bool;
-    using GLsizeptr = ptrdiff_t;
+    using GLsizeiptr = ptrdiff_t;
     using GLvoid = void;
 
     inline constexpr GLenum COLOR_BUFFER_BIT = 0x00004000;
@@ -42,10 +42,10 @@ namespace azro::gl{
 
     using GenBuffersFn = void(*)(GLsizei, GLuint*);
     using BindBufferFn = void(*)(GLenum, GLuint);
-    using BufferDataFn = void(*)(GLenum, GLsizeptr, const GLvoid*, GLenum);
+    using BufferDataFn = void(*)(GLenum, GLsizeiptr, const GLvoid*, GLenum);
     using DeleteBuffersFn = void(*)(GLsizei, const GLuint*);
     extern GenBuffersFn GenBuffers;
-    extern  BindBufferFn BindBuffer;
+    extern BindBufferFn BindBuffer;
     extern BufferDataFn BufferData;
     extern DeleteBuffersFn DeleteBuffers;
 
@@ -55,21 +55,22 @@ namespace azro::gl{
     using EnableVertexAttribArrayFn = void(*)(GLuint);
     using DeleteVertexArraysFn = void(*)(GLsizei, const GLuint*);
     extern GenVertexArrayFn GenVertexArrays;
-    extern BindBufferFn BindVertexArray;
+    extern BindVertexArraysFn BindVertexArray;
     extern VertexAttribPointerFn VertexAttribPointer;
     extern EnableVertexAttribArrayFn EnableVertexAttribArray;
     extern DeleteBuffersFn DeleteVertexArrays;
 
     using CreateShaderFn = GLuint(*)(GLenum);
     using ShaderSourceFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
-    using CompileShaderFn= void(*)(GLuint);
+    using CompileShaderFn = void(*)(GLuint);
+    using GetShaderivFn = void(*)(GLuint, GLenum, GLint*);
     using GetShaderFn = void(*)(GLuint, GLenum, GLint*);
     using GetShaderInfoLogFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
     using DeleteShaderFn = void(*)(GLuint);
     extern CreateShaderFn CreateShader;
     extern ShaderSourceFn ShaderSource;
     extern CompileShaderFn CompileShader;
-    extern GetShaderFn GetShaderiv;
+    extern GetShaderivFn GetShaderiv;
     extern GetShaderInfoLogFn GetShaderInfoLog;
     extern DeleteShaderFn DeleteShader;
 
@@ -77,14 +78,14 @@ namespace azro::gl{
     using AttachShaderFn = void(*)(GLuint, GLuint);
     using LinkProgramFn = void(*)(GLuint);
     using GetProgramivFn = void(*)(GLuint, GLenum, GLint*);
-    using GetprogramInfoLogFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
+    using GetProgramInfoLogFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
     using UseProgramFn = void(*)(GLuint);
     using DeleteProgramFn = void(*)(GLuint);
     extern CreateProgramFn CreateProgram;
     extern AttachShaderFn AttachShader;
     extern LinkProgramFn LinkProgram;
     extern GetProgramivFn GetProgramiv;
-    extern GetprogramInfoLogFn GetProgramInfoLog;
+    extern GetProgramInfoLogFn GetProgramInfoLog;
     extern UseProgramFn UseProgram;
     extern DeleteProgramFn DeleteProgram;
 

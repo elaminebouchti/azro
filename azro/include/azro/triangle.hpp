@@ -1,9 +1,10 @@
 #pragma once
+#include <array>
 
 namespace azro{
 class Triangle{
     public:
-    Triangle();
+    Triangle(std::array<float, 6>& vertices);
 
     ~Triangle();
 
