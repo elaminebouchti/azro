@@ -82,7 +82,7 @@ void azro::gl::load_functions(){
     load(gl::AttachShader, "glAttachShader");
     load(gl::LinkProgram, "glLinkProgram");
     load(gl::GetProgramiv, "glGetProgramiv");
-    load(gl::GetProgramInfoLog, "glGetPrpgramInfoLog");
+    load(gl::GetProgramInfoLog, "glGetProgramInfoLog");
     load(gl::UseProgram, "glUseProgram");
     load(gl::DeleteProgram, "glDeleteProgram");
 

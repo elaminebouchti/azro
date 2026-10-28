@@ -22,7 +22,7 @@ namespace azro::gl{
     inline constexpr GLenum RENDERER = 0x1F01;
     inline constexpr GLenum ARRAY_BUFFER = 0x8892;
     inline constexpr GLenum STATIC_DRAW = 0x88E4;
-    inline constexpr GLenum FLOAT = 0x8B50;
+    inline constexpr GLenum FLOAT = 0x1406;
     inline constexpr GLenum FALSE = 0;
     inline constexpr GLenum VERTEX_SHADER = 0x8B31;
     inline constexpr GLenum FRAGMENT_SHADER = 0x8B30;
