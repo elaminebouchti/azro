@@ -100,5 +100,6 @@ namespace azro::gl{
     void load(Fn& out, const char* name);
 
     void print_info();
+    void check_error(const char* where);
 
 }

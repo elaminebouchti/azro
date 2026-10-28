@@ -15,7 +15,8 @@ int main(){
         
         while(!window.should_close()){
             window.poll_events();
-            window.clear(0,250,0);
+            window.clear(0,0,100);
+            triangle.draw();    
             window.present();
         }
     }catch(const std::exception& e) {std::cerr << e.what() << "\n"; return 1;}

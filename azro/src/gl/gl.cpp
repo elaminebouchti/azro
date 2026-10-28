@@ -100,3 +100,11 @@ void azro::gl::print_info(){
     std::cout << "Version :" << version << "\nVendor : " << vendor << "\nRenderer : " << renderer <<"\n";
 }
 
+void azro::gl::check_error(const char* where){
+    azro::gl::GLenum err;
+    while((err = GetError()) != NO_ERROR){
+        std::cout <<"OpenGl Error " << where << "triggered Error code :" << err << std::dec << "\n";
+    }
+
+}
+

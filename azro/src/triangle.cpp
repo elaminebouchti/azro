@@ -3,52 +3,52 @@
 #include "gl/gl.hpp"
 
 
-void azro::Triangle::create_vertex_shader(const char* VertexShader){
-    azro::gl::ShaderSource(azro::gl::CreateShader(azro::gl::VERTEX_SHADER), 1, &VertexShader, nullptr);
-}
-
-void azro::Triangle::create_fragement_shader(const char* FragmentShader){
-    azro::gl::ShaderSource(azro::gl::CreateShader(azro::gl::FRAGMENT_SHADER), 1, &FragmentShader, nullptr);
-}
-
-void azro::Triangle::create_program(const char* vertex_shader, const char* fragment_shader){
-    azro::gl::GLuint program = azro::gl::CreateProgram();
-    azro::gl::AttachShader(program, static_cast<azro::gl::GLuint>(*vertex_shader));
-    azro::gl::AttachShader(program, static_cast<azro::gl::GLuint>(*fragment_shader));
-    azro::gl::LinkProgram(program);
+unsigned int azro::Triangle::compile_shader(unsigned int type, const char* source){
+    azro::gl::GLuint shader = azro::gl::CreateShader(static_cast<azro::gl::GLuint>(type));
+    azro::gl::ShaderSource(shader, 1, &source, nullptr);
+    azro::gl::CompileShader(shader);
+    return static_cast<azro::gl::GLuint>(shader);
 }
 
 azro::Triangle::Triangle(std::array<float, 6>& vertices){
-    azro::gl::GenVertexArrays(vao_, &vao_);
+    azro::gl::GenVertexArrays(1, &vao_);
     azro::gl::BindVertexArray(vao_);
 
-    azro::gl::GenBuffers(vbo_, &vbo_);
-    azro::gl::BindBuffer(vao_, vbo_);
+    azro::gl::GenBuffers(1, &vbo_);
+    azro::gl::BindBuffer(azro::gl::ARRAY_BUFFER, vbo_);
 
-    azro::gl::BufferData(vao_, static_cast<azro::gl::GLsizeiptr>(sizeof(vertices)), &vbo_, azro::gl::STATIC_DRAW);
+    azro::gl::BufferData(azro::gl::ARRAY_BUFFER, static_cast<azro::gl::GLsizeiptr>(sizeof(vertices)), static_cast<const azro::gl::GLvoid*>(vertices.data()), azro::gl::STATIC_DRAW);
 
     azro::gl::VertexAttribPointer(0, 2, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(2 * sizeof(float)), nullptr);
 
     azro::gl::EnableVertexAttribArray(0);
 
-    const char* VertexShader = R"(
+    const char* VertexShadersSrc = R"(
     #version 330 core
     layout(location = 0) in vec2 a_pos;
     void main(){
-    gl_Position = vec4(a_pos, 0.0, 1.0);
+        gl_Position = vec4(a_pos, 0.0, 1.0);
     })";
 
-    const char* FragmentShader = R"(
-    version 330 core
+    const char* FragmentShaderSrc = R"(
+    #version 330 core
     out vec4 frag_color;
-
     void main(){
-    frag_color = vec4(0.0f, 0.5f, 0.0f, 0.0f);
+        frag_color = vec4(1.0f, 0.0f, 0.0f, 1.0f);
     })";
 
-    create_vertex_shader(VertexShader);
-    create_fragement_shader(FragmentShader);
-    create_program(VertexShader, FragmentShader);
+    unsigned int vs = compile_shader(azro::gl::VERTEX_SHADER, VertexShadersSrc);
+    unsigned int fs = compile_shader(azro::gl::FRAGMENT_SHADER, FragmentShaderSrc);
+
+    program_ = azro::gl::CreateProgram();
+    azro::gl::AttachShader(program_, static_cast<azro::gl::GLuint>(vs));
+    azro::gl::AttachShader(program_, static_cast<azro::gl::GLuint>(fs));
+    azro::gl::LinkProgram(program_);
+
+    azro::gl::DeleteShader(vs);
+    azro::gl::DeleteShader(fs);
+
+
 }
 
 azro::Triangle::~Triangle(){}
@@ -57,4 +57,5 @@ void azro::Triangle::draw()const{
     azro::gl::UseProgram(program_);
     azro::gl::BindVertexArray(vao_);
     azro::gl::DrawArrays(azro::gl::TRIANGLES, 0, 3);
+    azro::gl::check_error("after draw : ");
 }

@@ -4,9 +4,7 @@
 namespace azro{
 class Triangle{
     public:
-    void create_vertex_shader(const char* VertexShader);
-    void create_fragement_shader(const char* FragmentShader);
-    void create_program(const char* vertex_shader, const char* fragment_shader);
+    unsigned int compile_shader(unsigned int type, const char* source);
     Triangle(std::array<float, 6>& vertices);
 
     ~Triangle();
