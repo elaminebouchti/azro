@@ -9,6 +9,16 @@ azro::gl::ClearColorFn azro::gl::ClearColor = nullptr;
 azro::gl::ViewportFn azro::gl::Viewport = nullptr;
 azro::gl::GetStringFn azro::gl::GetString = nullptr;
 
+namespace azro::gl{
+    namespace {
+    const char* or_unknown(const char* text){
+        if(text == nullptr) return "unknown";
+        return text; 
+        }
+
+    }
+}
+
 void azro::gl::load_functions(){
     gl::Clear = reinterpret_cast<gl::ClearFn>(SDL_GL_GetProcAddress("glClear"));
     if(gl::Clear == nullptr) throw std::runtime_error(std::string("failed to load glClear : ") + SDL_GetError());
@@ -31,13 +41,5 @@ void azro::gl::print_info(){
     const char* renderer = reinterpret_cast<const char*>(gl::GetString(gl::RENDERER));
     renderer = or_unknown(renderer);
     std::cout << "Version :" << version << "\nVendor : " << vendor << "\nRenderer : " << renderer <<"\n";
-}
-
-namespace{
-    const char* or_unknown(const char* text){
-        if(text == nullptr) return "unknown";
-        return text; 
-    }
-
 }
 
