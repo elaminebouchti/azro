@@ -11,6 +11,13 @@ void azro::Triangle::create_fragement_shader(const char* FragmentShader){
     azro::gl::ShaderSource(azro::gl::CreateShader(azro::gl::FRAGMENT_SHADER), 1, &FragmentShader, nullptr);
 }
 
+void azro::Triangle::create_program(const char* vertex_shader, const char* fragment_shader){
+    azro::gl::GLuint program = azro::gl::CreateProgram();
+    azro::gl::AttachShader(program, static_cast<azro::gl::GLuint>(*vertex_shader));
+    azro::gl::AttachShader(program, static_cast<azro::gl::GLuint>(*fragment_shader));
+    azro::gl::LinkProgram(program);
+}
+
 azro::Triangle::Triangle(std::array<float, 6>& vertices){
     azro::gl::GenVertexArrays(vao_, &vao_);
     azro::gl::BindVertexArray(vao_);
@@ -41,6 +48,8 @@ azro::Triangle::Triangle(std::array<float, 6>& vertices){
 
     create_vertex_shader(VertexShader);
     create_fragement_shader(FragmentShader);
+    create_program(VertexShader, FragmentShader);
+
 
 }
 

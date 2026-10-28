@@ -6,6 +6,7 @@ class Triangle{
     public:
     void create_vertex_shader(const char* VertexShader);
     void create_fragement_shader(const char* FragmentShader);
+    void create_program(const char* vertex_shader, const char* fragment_shader);
     Triangle(std::array<float, 6>& vertices);
 
     ~Triangle();
