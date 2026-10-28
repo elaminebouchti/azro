@@ -61,7 +61,7 @@ namespace azro::gl{
     extern DeleteBuffersFn DeleteVertexArrays;
 
     using CreateShaderFn = GLuint(*)(GLenum);
-    using ShaderSourceFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
+    using ShaderSourceFn = void(*)(GLuint, GLsizei, const GLchar**, GLchar*);
     using CompileShaderFn = void(*)(GLuint);
     using GetShaderivFn = void(*)(GLuint, GLenum, GLint*);
     using GetShaderFn = void(*)(GLuint, GLenum, GLint*);

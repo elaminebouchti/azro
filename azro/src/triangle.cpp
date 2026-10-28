@@ -3,6 +3,14 @@
 #include "gl/gl.hpp"
 
 
+void azro::Triangle::create_vertex_shader(const char* VertexShader){
+    azro::gl::ShaderSource(azro::gl::CreateShader(azro::gl::VERTEX_SHADER), 1, &VertexShader, nullptr);
+}
+
+void azro::Triangle::create_fragement_shader(const char* FragmentShader){
+    azro::gl::ShaderSource(azro::gl::CreateShader(azro::gl::FRAGMENT_SHADER), 1, &FragmentShader, nullptr);
+}
+
 azro::Triangle::Triangle(std::array<float, 6>& vertices){
     azro::gl::GenVertexArrays(vao_, &vao_);
     azro::gl::BindVertexArray(vao_);
@@ -16,14 +24,14 @@ azro::Triangle::Triangle(std::array<float, 6>& vertices){
 
     azro::gl::EnableVertexAttribArray(0);
 
-    const char* ShaderSource = R"(
+    const char* VertexShader = R"(
     #version 330 core
     layout(location = 0) in vec2 a_pos;
     void main(){
     gl_Position = vec4(a_pos, 0.0, 1.0);
     })";
 
-    const char* FragShader = R"(
+    const char* FragmentShader = R"(
     version 330 core
     out vec4 frag_color;
 
@@ -31,6 +39,8 @@ azro::Triangle::Triangle(std::array<float, 6>& vertices){
     frag_color = vec4(0.0f, 0.5f, 0.0f, 0.0f);
     })";
 
+    create_vertex_shader(VertexShader);
+    create_fragement_shader(FragmentShader);
 
 }
 
