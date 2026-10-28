@@ -14,6 +14,8 @@ namespace azro::gl{
     using GLchar = char;
     using GLboolean = bool;
     using GLsizeptr = ptrdiff_t;
+    using GLvoid = void;
+
     inline constexpr GLenum COLOR_BUFFER_BIT = 0x00004000;
     inline constexpr GLenum VERSION = 0x1F02;
     inline constexpr GLenum VENDOR = 0x1F00;
@@ -28,6 +30,7 @@ namespace azro::gl{
     inline constexpr GLenum LINK_STATUS = 0x8B82;
     inline constexpr GLenum INFO_LOG_LENGTH = 0x8B84;
     inline constexpr GLenum NO_ERROR = 0;
+
     using ClearFn = void(*)(GLbitfield);
     using ClearColorFn = void(*)(GLfloat, GLfloat, GLfloat, GLfloat);
     using ViewportFn = void(*)(GLint, GLint, GLsizei, GLsizei);
@@ -36,6 +39,59 @@ namespace azro::gl{
     extern ClearColorFn ClearColor;
     extern ViewportFn  Viewport;
     extern GetStringFn GetString;
+
+    using GenBuffersFn = void(*)(GLsizei, GLuint*);
+    using BindBufferFn = void(*)(GLenum, GLuint);
+    using BufferDataFn = void(*)(GLenum, GLsizeptr, const GLvoid*, GLenum);
+    using DeleteBuffersFn = void(*)(GLsizei, const GLuint*);
+    extern GenBuffersFn GenBuffers;
+    extern  BindBufferFn BindBuffer;
+    extern BufferDataFn BufferData;
+    extern DeleteBuffersFn DeleteBuffers;
+
+    using GenVertexArrayFn = void(*)(GLsizei, GLuint*);
+    using BindVertexArraysFn = void(*)(GLuint);
+    using VertexAttribPointerFn = void(*)(GLuint, GLint, GLenum, GLboolean, GLsizei, const GLvoid*);
+    using EnableVertexAttribArrayFn = void(*)(GLuint);
+    using DeleteVertexArraysFn = void(*)(GLsizei, const GLuint*);
+    extern GenVertexArrayFn GenVertexArrays;
+    extern BindBufferFn BindVertexArray;
+    extern VertexAttribPointerFn VertexAttribPointer;
+    extern EnableVertexAttribArrayFn EnableVertexAttribArray;
+    extern DeleteBuffersFn DeleteVertexArrays;
+
+    using CreateShaderFn = GLuint(*)(GLenum);
+    using ShaderSourceFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
+    using CompileShaderFn= void(*)(GLuint);
+    using GetShaderFn = void(*)(GLuint, GLenum, GLint*);
+    using GetShaderInfoLogFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
+    using DeleteShaderFn = void(*)(GLuint);
+    extern CreateShaderFn CreateShader;
+    extern ShaderSourceFn ShaderSource;
+    extern CompileShaderFn CompileShader;
+    extern GetShaderFn GetShaderiv;
+    extern GetShaderInfoLogFn GetShaderInfoLog;
+    extern DeleteShaderFn DeleteShader;
+
+    using CreateProgramFn = GLuint(*)(void);
+    using AttachShaderFn = void(*)(GLuint, GLuint);
+    using LinkProgramFn = void(*)(GLuint);
+    using GetProgramivFn = void(*)(GLuint, GLenum, GLint*);
+    using GetprogramInfoLogFn = void(*)(GLuint, GLsizei, GLsizei*, GLchar*);
+    using UseProgramFn = void(*)(GLuint);
+    using DeleteProgramFn = void(*)(GLuint);
+    extern CreateProgramFn CreateProgram;
+    extern AttachShaderFn AttachShader;
+    extern LinkProgramFn LinkProgram;
+    extern GetProgramivFn GetProgramiv;
+    extern GetprogramInfoLogFn GetProgramInfoLog;
+    extern UseProgramFn UseProgram;
+    extern DeleteProgramFn DeleteProgram;
+
+    using DrawArraysFn = void(*)(GLenum, GLint, GLsizei);
+    using GetErrorFn = GLenum(*)(void);
+    extern DrawArraysFn DrawArrays;
+    extern GetErrorFn GetError;
 
     void load_functions();
     template <typename Fn>

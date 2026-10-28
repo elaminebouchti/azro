@@ -1,12 +1,14 @@
 #include <iostream>
 #include <azro/platform.hpp>
 #include <azro/window.hpp>
+#include <azro/triangle.hpp>
 
 
 int main(){
     try{
         azro::Platform platform;
         azro::Window window("azro sandbox", 800, 600);
+        azro::Triangle triangle();
         
         while(!window.should_close()){
             window.poll_events();
