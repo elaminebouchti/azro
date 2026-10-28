@@ -20,9 +20,9 @@ azro::Window::Window(const std::string& title, int width, int height){
     if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE)) throw std::runtime_error("Error : Context Profile Mask or Context profile Core is is not accessible");
     if(!SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1)) throw std::runtime_error("Error : Double Buffer Failed");
 
-    window_ = std::unique_ptr<SDL_Window, SDL_WindowDeleter>(SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL));
+    window_.reset((SDL_CreateWindow(title.c_str(), width, height, SDL_WINDOW_OPENGL)));
     if(!window_) throw std::runtime_error(std::string("SDL_CreateWindow failed: ") + SDL_GetError());
-    context_ = std::unique_ptr<SDL_GLContextState, SDL_GLContextStateDeleter>(SDL_GL_CreateContext(window_.get()));
+    context_.reset(SDL_GL_CreateContext(window_.get()));
     if(!context_) throw std::runtime_error(std::string("Context creation failed : ") + SDL_GetError());
     if(!SDL_GL_MakeCurrent(window_.get(), context_.get())) throw std::runtime_error(std::string("window cannot currently be made : ") + SDL_GetError());
     gl::load_functions();

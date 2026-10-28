@@ -23,7 +23,5 @@ namespace azro::gl{
 
     void load_functions();
     void print_info();
-    const char* helper_function(const char* text);
-
 
 }

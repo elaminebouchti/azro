@@ -20,21 +20,24 @@ void azro::gl::load_functions(){
     if(gl::Viewport == nullptr) throw std::runtime_error(std::string("failed to load glViewport : ") + SDL_GetError());
 
     gl::GetString = reinterpret_cast<gl::GetStringFn>(SDL_GL_GetProcAddress("glGetString"));
-    if(gl::GetString == nullptr) throw std::runtime_error(std::string("glGetString : ") + SDL_GetError());
+    if(gl::GetString == nullptr) throw std::runtime_error(std::string("failed to load glGetString : ") + SDL_GetError());
 }
 
 void azro::gl::print_info(){
     const char* version = reinterpret_cast<const char*>(gl::GetString((gl::VERSION)));
-    version = helper_function(version);
+    version = or_unknown(version);
     const char* vendor = reinterpret_cast<const char*>(gl::GetString(gl::VENDOR));
-    vendor = helper_function(vendor);
+    vendor = or_unknown(vendor);
     const char* renderer = reinterpret_cast<const char*>(gl::GetString(gl::RENDERER));
-    renderer = helper_function(renderer);
+    renderer = or_unknown(renderer);
     std::cout << "Version :" << version << "\nVendor : " << vendor << "\nRenderer : " << renderer <<"\n";
 }
 
-const char* azro::gl::helper_function(const char* text){
-    if(text == nullptr) return "unknown";
-    return text; 
+namespace{
+    const char* or_unknown(const char* text){
+        if(text == nullptr) return "unknown";
+        return text; 
+    }
+
 }
 
