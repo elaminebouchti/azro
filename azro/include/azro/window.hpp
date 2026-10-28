@@ -3,32 +3,19 @@
 #include <string>
 #include <cstdint>
 #include <memory>
-#include <iostream>
 
 struct SDL_Window;
 struct SDL_GLContextState;
-extern "C" void SDL_DestroyWindow(SDL_Window*);
-extern "C" bool SDL_GL_DestroyContext(SDL_GLContextState*);
 
 namespace azro{
-    
+
     struct SDL_WindowDeleter{
-        void operator()(SDL_Window* window_) const{
-            if(window_){
-                SDL_DestroyWindow(window_);
-                std::cout << "Window deleted\n";
-            }
-        }
+        void operator()(SDL_Window* window_) const;
     };
     
 
     struct SDL_GLContextStateDeleter{
-        void operator()(SDL_GLContextState* context_) const{
-            if(context_) {
-                SDL_GL_DestroyContext(context_);
-                std::cout << "Context deleted\n";
-            }
-        }
+        void operator()(SDL_GLContextState* context_) const;
     };
 
     class Window{

@@ -4,6 +4,15 @@
 #include <stdexcept>
 #include <iostream>
 
+
+void azro::SDL_WindowDeleter::operator()(SDL_Window* window_) const{
+    if(window_) SDL_DestroyWindow(window_);
+}
+
+void azro::SDL_GLContextStateDeleter::operator()(SDL_GLContextState* context_)const{
+    if(context_) SDL_GL_DestroyContext(context_);
+}
+
 azro::Window::Window(const std::string& title, int width, int height){
     // Request
     if(!SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3)) throw std::runtime_error("Error : Major is not accessible ");
@@ -19,7 +28,7 @@ azro::Window::Window(const std::string& title, int width, int height){
     gl::load_functions();
     gl::print_info();
     gl::Viewport(0, 0, width, height);
-    if(!SDL_GL_SetSwapInterval(1)) std::cerr<<"glSetSweepINtervall failed\n";
+    if(!SDL_GL_SetSwapInterval(1)) std::cerr<<"SDL_GL_SetSwapInterval failed : " << SDL_GetError() << "\n";
 
 
     // initialize the timer 
