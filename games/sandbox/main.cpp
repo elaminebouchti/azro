@@ -2,6 +2,7 @@
 #include <azro/platform.hpp>
 #include <azro/window.hpp>
 #include <azro/triangle.hpp>
+#include <array>
 
 
 int main(){
@@ -37,10 +38,10 @@ int main(){
         while(!window.should_close()){
             window.poll_events();
             window.clear(250,250,250);
-            //triangle1.draw();
-            //triangle2.draw();   
-            //triangle3.draw();   
-            //triangle4.draw();
+            triangle1.draw();
+            triangle2.draw();   
+            triangle3.draw();   
+            triangle4.draw();
             triangle5.draw();   
             window.present();
         }
