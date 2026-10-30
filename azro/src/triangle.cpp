@@ -6,24 +6,24 @@
 
 namespace azro{
     namespace{
-    unsigned int compile_shader(unsigned int type, const char* source){
-        azro::gl::GLuint shader = azro::gl::CreateShader(static_cast<azro::gl::GLuint>(type));
-        azro::gl::ShaderSource(shader, 1, &source, nullptr);
-        azro::gl::CompileShader(shader);
-        azro::gl::GLint success = 0;
-        azro::gl::GetShaderiv(shader, azro::gl::COMPILE_STATUS, &success);
-        if(success == azro::gl::FALSE) {
-            azro::gl::GLint log_length = 0;
-            azro::gl::GetShaderiv(shader, azro::gl::INFO_LOG_LENGTH, &log_length);
-            std::string infoLog(log_length, '\0');
-            azro::gl::GetShaderInfoLog(shader, log_length, &log_length, infoLog.data());
-            std::cerr << "Error::Shader::COMPILATION_FAILED\n" << infoLog << "\n";
-            azro::gl::DeleteShader(shader);
-            return 0;
+        unsigned int compile_shader(unsigned int type, const char* source){
+            azro::gl::GLuint shader = azro::gl::CreateShader(static_cast<azro::gl::GLuint>(type));
+            azro::gl::ShaderSource(shader, 1, &source, nullptr);
+            azro::gl::CompileShader(shader);
+            azro::gl::GLint success = 0;
+            azro::gl::GetShaderiv(shader, azro::gl::COMPILE_STATUS, &success);
+            if(success == azro::gl::FALSE) {
+                azro::gl::GLint log_length = 0;
+                azro::gl::GetShaderiv(shader, azro::gl::INFO_LOG_LENGTH, &log_length);
+                std::string infoLog(log_length, '\0');
+                azro::gl::GetShaderInfoLog(shader, log_length, &log_length, infoLog.data());
+                std::cerr << "Error::Shader::COMPILATION_FAILED\n" << infoLog << "\n";
+                azro::gl::DeleteShader(shader);
+                return 0;
+            }
+            return static_cast<azro::gl::GLuint>(shader);
         }
-        return static_cast<azro::gl::GLuint>(shader);
-        }
-}
+    }
 }
 
 azro::Triangle::Triangle(const std::array<float, 15>& vertices){
@@ -36,9 +36,10 @@ azro::Triangle::Triangle(const std::array<float, 15>& vertices){
     azro::gl::BufferData(azro::gl::ARRAY_BUFFER, static_cast<azro::gl::GLsizeiptr>(sizeof(vertices)), static_cast<const azro::gl::GLvoid*>(vertices.data()), azro::gl::STATIC_DRAW);
 
     azro::gl::VertexAttribPointer(0, 2, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), reinterpret_cast<const void*>(0));
-    azro::gl::VertexAttribPointer(0, 2, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), reinterpret_cast<const void*>(2*sizeof(float)));
+    azro::gl::VertexAttribPointer(1, 3, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), reinterpret_cast<const void*>(2*sizeof(float)));
 
     azro::gl::EnableVertexAttribArray(0);
+    azro::gl::EnableVertexAttribArray(1);
 
     const char* VertexShadersSrc = R"(
     #version 330 core
@@ -52,7 +53,7 @@ azro::Triangle::Triangle(const std::array<float, 15>& vertices){
 
     const char* FragmentShaderSrc = R"(
     #version 330 core
-    in vec3 vertex_color
+    in vec3 vertex_color;
     out vec4 frag_color;
     void main(){
         frag_color = vec4(vertex_color, 1.0f);
