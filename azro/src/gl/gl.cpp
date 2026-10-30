@@ -44,7 +44,7 @@ namespace azro::gl{
         if(text == nullptr) return "unknown";
         return text; 
         }
-        template <typename Fn>
+    template <typename Fn>
     void load(Fn& out, const char* name){
         out = reinterpret_cast<Fn>(SDL_GL_GetProcAddress(name));
         if(out == nullptr) throw std::runtime_error(std::string("failed to load ") + name + SDL_GetError());
@@ -103,7 +103,7 @@ void azro::gl::print_info(){
 void azro::gl::check_error(const char* where){
     azro::gl::GLenum err;
     while((err = GetError()) != NO_ERROR){
-        std::cout <<"OpenGl Error " << where << "triggered Error code :" << err << std::dec << "\n";
+        std::cout <<"OpenGl Error " << where << "triggered Error code :" << std::hex << err << std::dec << "\n";
     }
 
 }
