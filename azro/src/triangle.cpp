@@ -1,8 +1,7 @@
 #include "azro/triangle.hpp"
-#include <SDL3/SDL.h>
 #include "gl/gl.hpp"
 #include <string>
-#include <iostream>
+#include <stdexcept>
 
 namespace azro{
     namespace{
@@ -18,8 +17,8 @@ namespace azro{
                 std::string infoLog(log_length, '\0');
                 azro::gl::GetShaderInfoLog(shader, log_length, &log_length, infoLog.data());
                 infoLog.resize(log_length);
-                throw std::runtime_error(std::string("Compilation failed : ") + infoLog);
                 azro::gl::DeleteShader(shader);
+                throw std::runtime_error(std::string("Compilation failed : ") + infoLog);
             }
             return static_cast<azro::gl::GLuint>(shader);
         }
@@ -74,11 +73,10 @@ azro::Triangle::Triangle(const std::array<float, 15>& vertices){
         std::string infoLog(log_length, '\0');
         azro::gl::GetProgramInfoLog(program_, log_length, &log_length, infoLog.data());
         infoLog.resize(log_length);
-        throw std::runtime_error(std::string("linking program failed : " + infoLog));
         azro::gl::DeleteShader(vs);
         azro::gl::DeleteShader(fs);
         azro::gl::DeleteProgram(program_);
-
+        throw std::runtime_error(std::string("linking program failed : ") + infoLog);
     }
     azro::gl::DeleteShader(vs);
     azro::gl::DeleteShader(fs);
