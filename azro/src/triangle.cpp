@@ -1,5 +1,7 @@
 #include "azro/triangle.hpp"
 #include "gl/gl.hpp"
+#include "gl/buffer.hpp"
+#include "gl/vertexArray.hpp"
 #include <string>
 #include <stdexcept>
 
@@ -25,20 +27,21 @@ namespace azro{
     }
 }
 
-azro::Triangle::Triangle(const std::array<float, 15>& vertices){
-    azro::gl::GenVertexArrays(1, &vao_);
-    azro::gl::BindVertexArray(vao_);
 
-    azro::gl::GenBuffers(1, &vbo_);
-    azro::gl::BindBuffer(azro::gl::ARRAY_BUFFER, vbo_);
+struct azro::Triangle::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro::gl::ARRAY_BUFFER};};
 
-    azro::gl::BufferData(azro::gl::ARRAY_BUFFER, static_cast<azro::gl::GLsizeiptr>(sizeof(vertices)), static_cast<const azro::gl::GLvoid*>(vertices.data()), azro::gl::STATIC_DRAW);
 
-    azro::gl::VertexAttribPointer(0, 2, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), nullptr);
-    azro::gl::VertexAttribPointer(1, 3, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), reinterpret_cast<const void*>(2*sizeof(float)));
+azro::Triangle::Triangle(const std::array<float, 15>& vertices): impl_(new Impl{}){
+    impl_->vao.bind();
+    impl_->vbo.upload(sizeof(vertices), &vertices);
 
-    azro::gl::EnableVertexAttribArray(0);
-    azro::gl::EnableVertexAttribArray(1);
+    impl_->vao.attribute(impl_->vbo, 0, 2, 5 * sizeof(float), 0);
+    impl_->vao.attribute(impl_->vbo, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
+    //azro::gl::VertexAttribPointer(0, 2, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), nullptr);
+    //azro::gl::VertexAttribPointer(1, 3, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), reinterpret_cast<const void*>(2*sizeof(float)));
+
+    //azro::gl::EnableVertexAttribArray(0);
+    //azro::gl::EnableVertexAttribArray(1);
 
     const char* VertexShadersSrc = R"(
     #version 330 core
@@ -83,14 +86,13 @@ azro::Triangle::Triangle(const std::array<float, 15>& vertices){
 }
 
 azro::Triangle::~Triangle(){
-    azro::gl::DeleteVertexArrays(1, &vao_);
-    azro::gl::DeleteBuffers(1, &vbo_);
     azro::gl::DeleteProgram(program_);
 }
 
 void azro::Triangle::draw()const{
     azro::gl::UseProgram(program_);
-    azro::gl::BindVertexArray(vao_);
+    impl_->vao.bind();
     azro::gl::DrawArrays(azro::gl::TRIANGLES, 0, 3);
     azro::gl::check_error("after draw : ");
 }
+

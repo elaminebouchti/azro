@@ -1,7 +1,7 @@
 #include "gl/vertexArray.hpp"
 
 
-azro::gl::VertexArray::VertexArray(azro::gl::GLuint vao): vao_(vao){
+azro::gl::VertexArray::VertexArray(): vao_(){
     azro::gl::GenVertexArrays(1, &vao_);
 }
 
@@ -17,6 +17,7 @@ void azro::gl::VertexArray::bind() const{
 
 void azro::gl::VertexArray::attribute(const Buffer& vbo, GLuint index, GLint size, GLsizei stride, std::size_t offset){
     bind();
-    vbo.upload(size, nullptr);
+    vbo.bind();
     VertexAttribPointer(index, size, azro::gl::FLOAT, azro::gl::FALSE, stride, reinterpret_cast<const void*>(offset));
+    EnableVertexAttribArray(index);
 }

@@ -2,11 +2,12 @@
 #include "gl/gl.hpp"
 #include "gl/buffer.hpp"
 #include <utility>
+#include <cstddef>
 
 namespace azro::gl{
     class VertexArray{
         public:
-        VertexArray(azro::gl::GLuint vao_);
+        VertexArray();
         ~VertexArray();
 
         VertexArray(const VertexArray&) = delete;

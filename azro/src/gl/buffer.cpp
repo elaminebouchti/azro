@@ -1,8 +1,8 @@
 #include "gl/buffer.hpp"
 
 
-azro::gl::Buffer::Buffer(GLenum type){
-    GenBuffers(type, &vbo_);
+azro::gl::Buffer::Buffer(azro::gl::GLenum type): type_(type){
+    GenBuffers(1, &vbo_);
 }
 
 azro::gl::Buffer::~Buffer(){
@@ -10,10 +10,10 @@ azro::gl::Buffer::~Buffer(){
         azro::gl::DeleteBuffers(1, &vbo_);
     }
 }
-void azro::gl::Buffer::upload(GLsizeiptr size, GLvoid* data) const{
+void azro::gl::Buffer::upload(GLsizeiptr size, const GLvoid* data){
     bind();
-    BufferData(ARRAY_BUFFER, size, data, STATIC_DRAW);
+    BufferData(type_, size, data, STATIC_DRAW);
 }
 void azro::gl::Buffer::bind() const{
-    BindBuffer(1, vbo_);
+    BindBuffer(type_, vbo_);
 }

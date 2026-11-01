@@ -1,5 +1,7 @@
 #pragma once
 #include <array>
+#include <memory>
+
 
 namespace azro{
 class Triangle{
@@ -12,8 +14,8 @@ class Triangle{
     Triangle& operator=(const Triangle&) = delete;
     void draw() const;
     private:
-    unsigned int vao_ = 0;
-    unsigned int vbo_ = 0;
+    struct Impl;
+    std::unique_ptr<Impl> impl_;
     unsigned int program_ = 0;
 
 };
