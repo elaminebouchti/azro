@@ -8,6 +8,7 @@ azro::gl::VertexArray::VertexArray(azro::gl::GLuint vao): vao_(vao){
 
 azro::gl::VertexArray::~VertexArray(){
     if(vao_ != 0){
-        vao_ = 0;
+        azro::gl::DeleteVertexArrays(1, &vao_);
     }
 }
+
