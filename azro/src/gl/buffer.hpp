@@ -18,6 +18,7 @@ namespace azro::gl{
         }
 
         void upload(GLsizeiptr size, GLvoid* data) const;
+        void bind() const;
 
 
         private:

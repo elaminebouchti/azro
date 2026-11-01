@@ -11,6 +11,9 @@ azro::gl::Buffer::~Buffer(){
     }
 }
 void azro::gl::Buffer::upload(GLsizeiptr size, GLvoid* data) const{
-    BindBuffer(1, vbo_);
+    bind();
     BufferData(ARRAY_BUFFER, size, data, STATIC_DRAW);
+}
+void azro::gl::Buffer::bind() const{
+    BindBuffer(1, vbo_);
 }

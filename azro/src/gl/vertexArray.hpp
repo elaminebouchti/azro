@@ -16,7 +16,9 @@ namespace azro::gl{
             std::swap(vao_, other.vao_);
             return *this;
         }
-        void attribut(const Buffer& vbo, GLuint index, GLint size, GLsizei stride, std::size_t offset);
+
+        void bind() const;
+        void attribute(const Buffer& vbo, GLuint index, GLint size, GLsizei stride, std::size_t offset);
         private:
         azro::gl::GLuint vao_ = 0;
     };
