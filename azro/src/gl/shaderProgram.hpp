@@ -1,15 +1,16 @@
 #pragma once
+#include "gl/gl.hpp"
 
-
-class ShaderProgram{
-    public:
-    ShaderProgram();
-    class Shader{
+namespace azro::gl{
+    class ShaderProgram{
         public:
-        Shader();
-        void CreateShader();
-        void DeleteShader();
+        ShaderProgram();
+        class Shader{
+            public:
+            Shader();
+            ~Shader();
+            private:
+        };
         private:
     };
-    private:
-};
+}
