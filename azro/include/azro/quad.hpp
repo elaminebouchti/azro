@@ -6,13 +6,13 @@
 namespace azro{
     class Quad{
         public:
-        Quad(const std::array<float, 20>& vertices);
+        Quad(int window_width, int window_height);
         ~Quad();
 
         Quad(const Quad&) = delete;
         Quad& operator=(const Quad&) = delete;
 
-        void draw() const;
+        void draw(float x, float y, float w, float h, float r, float g, float b) const;
 
         private:
         struct Impl;
