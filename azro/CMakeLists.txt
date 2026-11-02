@@ -1,6 +1,7 @@
 
 
-add_library(azro STATIC src/platform.cpp src/window.cpp src/gl/gl.cpp src/triangle.cpp src/gl/buffer.cpp src/gl/vertexArray.cpp src/gl/shaderProgram.cpp)
+add_library(azro STATIC src/platform.cpp src/window.cpp src/gl/gl.cpp src/triangle.cpp src/gl/buffer.cpp 
+src/gl/vertexArray.cpp src/gl/shaderProgram.cpp src/quad.cpp)
 target_include_directories(azro PUBLIC include)
 target_include_directories(azro PRIVATE src)
 target_compile_features(azro PUBLIC cxx_std_20)

@@ -4,19 +4,19 @@
 
 
 namespace azro{
-class Triangle{
-    public:
-    Triangle(const std::array<float, 15>& vertices);
+    class Triangle{
+        public:
+        Triangle(const std::array<float, 15>& vertices);
 
-    ~Triangle();
+        ~Triangle();
 
-    Triangle(const Triangle&) = delete;
-    Triangle& operator=(const Triangle&) = delete;
-    void draw() const;
-    private:
-    struct Impl;
-    std::unique_ptr<Impl> impl_;
+        Triangle(const Triangle&) = delete;
+        Triangle& operator=(const Triangle&) = delete;
+        void draw() const;
+        private:
+        struct Impl;
+        std::unique_ptr<Impl> impl_;
 
-};
+    };
 
 }
