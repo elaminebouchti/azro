@@ -1,7 +1,6 @@
 #include <iostream>
 #include <azro/platform.hpp>
 #include <azro/window.hpp>
-#include <azro/triangle.hpp>
 #include <azro/quad.hpp>
 #include <array>
 

@@ -99,6 +99,12 @@ namespace azro::gl{
     extern GetErrorFn GetError;
     using DrawElementsFn = void(*)(GLenum, GLsizei, GLenum, const GLvoid*);
     extern DrawElementsFn DrawElements;
+    using GetUniformLocationFn = GLint(*)(GLuint, const GLchar*);
+    extern GetUniformLocationFn GetUniformLocation;
+    using Uniform4fFn = void(*)(GLint, GLfloat, GLfloat, GLfloat);
+    extern Uniform4fFn Uniform4f; 
+    using UniformMatrix4fvFn = void(*)(GLint, GLsizei, GLboolean, const GLfloat*);
+    extern UniformMatrix4fvFn UniformMatrix4fv;
 
     void load_functions();
     void print_info();

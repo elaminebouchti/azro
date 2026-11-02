@@ -35,8 +35,8 @@ azro::Quad::Quad(const std::array<float, 20>& vertices): impl_(new Impl{}){
 
     impl_->vao.index_buffer(impl_->ibo);
     impl_->ibo.upload(sizeof(azro::Indices), azro::Indices.data());
-    impl_->vao.attribute(impl_->vbo, 0, 2, static_cast<azro::gl::GLint>(5 * sizeof(float)), 0);
-    impl_->vao.attribute(impl_->vbo, 1, 3, static_cast<azro::gl::GLint>(5 * sizeof(float)), 2 * sizeof(float));
+    impl_->vao.attribute(impl_->vbo, 0, 2, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), 0);
+    impl_->vao.attribute(impl_->vbo, 1, 3, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), 2 * sizeof(float));
 
 }
 

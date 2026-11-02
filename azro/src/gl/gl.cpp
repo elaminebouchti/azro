@@ -39,6 +39,10 @@ azro::gl::DrawArraysFn azro::gl::DrawArrays = nullptr;
 azro::gl::DrawElementsFn azro::gl::DrawElements = nullptr;
 azro::gl::GetErrorFn azro::gl::GetError = nullptr;
 
+azro::gl::GetUniformLocationFn azro::gl::GetUniformLocation = nullptr;
+azro::gl::Uniform4fFn azro::gl::Uniform4f = nullptr;
+azro::gl::UniformMatrix4fvFn azro::gl::UniformMatrix4fv = nullptr;
+
 namespace azro::gl{
     namespace {
     const char* or_unknown(const char* text){
@@ -90,6 +94,10 @@ void azro::gl::load_functions(){
     load(gl::DrawArrays, "glDrawArrays");
     load(gl::DrawElements, "glDrawElements");
     load(gl::GetError, "glGetError");
+
+    load(gl::GetUniformLocation, "glGetUniformLocation");
+    load(gl::Uniform4f, "glUniform4f");
+    load(gl::UniformMatrix4fv, "glUniformMatrixfv");
 
 }
 
