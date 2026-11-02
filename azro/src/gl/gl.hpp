@@ -101,7 +101,7 @@ namespace azro::gl{
     extern DrawElementsFn DrawElements;
     using GetUniformLocationFn = GLint(*)(GLuint, const GLchar*);
     extern GetUniformLocationFn GetUniformLocation;
-    using Uniform4fFn = void(*)(GLint, GLfloat, GLfloat, GLfloat);
+    using Uniform4fFn = void(*)(GLint, GLfloat, GLfloat, GLfloat, GLfloat);
     extern Uniform4fFn Uniform4f; 
     using UniformMatrix4fvFn = void(*)(GLint, GLsizei, GLboolean, const GLfloat*);
     extern UniformMatrix4fvFn UniformMatrix4fv;
