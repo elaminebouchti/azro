@@ -38,13 +38,10 @@ azro::Triangle::Triangle(const std::array<float, 15>& vertices): impl_(new Impl{
     impl_->vao.attribute(impl_->vbo, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
 }
 
-azro::Triangle::~Triangle(){
-    azro::gl::DeleteProgram(program_);
-}
+azro::Triangle::~Triangle() = default;
 
 void azro::Triangle::draw()const{
     impl_->program.use();
-    impl_->vao.bind();
     azro::gl::DrawArrays(azro::gl::TRIANGLES, 0, 3);
     azro::gl::check_error("after draw : ");
 }

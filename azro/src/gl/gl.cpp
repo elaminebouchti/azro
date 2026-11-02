@@ -103,7 +103,7 @@ void azro::gl::print_info(){
 void azro::gl::check_error(const char* where){
     azro::gl::GLenum err;
     while((err = GetError()) != NO_ERROR){
-        std::cout <<"OpenGl Error " << where << "triggered Error code :" << std::hex << err << std::dec << "\n";
+        std::cout <<"OpenGl Error " << where << "triggered Error code : " << std::hex << "0x" << err << std::dec << "\n";
     }
 
 }

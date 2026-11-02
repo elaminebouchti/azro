@@ -1,4 +1,3 @@
-#include "gl/buffer.hpp"
 #include "gl/shaderProgram.hpp"
 #include <string>
 #include <stdexcept>
@@ -29,22 +28,20 @@ namespace azro::gl{
                 }
             }
             Shader(const Shader&) = delete;
-            Shader& operator=(Shader&) = delete;
+            Shader& operator=(const Shader&) = delete;
 
             GLuint id() const{
                 return shader_;
             }
             private:
-            explicit Shader(GLenum type){
-                CreateShader(type);
-            }
+            explicit Shader(GLenum type): shader_(CreateShader(type)){}
             GLuint shader_ = 0; 
         };
     }
 
     ShaderProgram::ShaderProgram(const char* vertex_src, const char* fragment_src): ShaderProgram(){
         Shader vs(VERTEX_SHADER , vertex_src);
-        Shader fs(VERTEX_SHADER , fragment_src);
+        Shader fs(FRAGMENT_SHADER , fragment_src);
 
         AttachShader(program_, vs.id());
         AttachShader(program_, fs.id());
