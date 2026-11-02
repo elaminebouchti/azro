@@ -19,7 +19,7 @@ namespace azro::gl{
 
         private:
         azro::gl::GLuint program_ = 0;
-        ShaderProgram();
+        ShaderProgram(): program_(CreateProgram()){};
 
     };
 }
