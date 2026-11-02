@@ -31,7 +31,6 @@ struct azro::Triangle::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro
 
 
 azro::Triangle::Triangle(const std::array<float, 15>& vertices): impl_(new Impl{}){
-    impl_->vao.bind();
     impl_->vbo.upload(sizeof(vertices), vertices.data());
 
     impl_->vao.attribute(impl_->vbo, 0, 2, 5 * sizeof(float), 0);
@@ -42,6 +41,7 @@ azro::Triangle::~Triangle() = default;
 
 void azro::Triangle::draw()const{
     impl_->program.use();
+    impl_->vao.bind();
     azro::gl::DrawArrays(azro::gl::TRIANGLES, 0, 3);
     azro::gl::check_error("after draw : ");
 }

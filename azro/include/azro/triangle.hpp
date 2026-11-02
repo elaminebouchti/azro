@@ -16,7 +16,6 @@ class Triangle{
     private:
     struct Impl;
     std::unique_ptr<Impl> impl_;
-    unsigned int program_ = 0;
 
 };
 

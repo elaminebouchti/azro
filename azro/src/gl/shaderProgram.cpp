@@ -2,7 +2,6 @@
 #include <string>
 #include <stdexcept>
 
-
 namespace azro::gl{
     namespace{
         class Shader{
@@ -35,7 +34,7 @@ namespace azro::gl{
             }
             private:
             explicit Shader(GLenum type): shader_(CreateShader(type)){}
-            GLuint shader_ = 0; 
+            GLuint shader_ = 0;
         };
     }
 
