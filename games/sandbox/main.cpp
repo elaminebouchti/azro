@@ -21,13 +21,11 @@ int main(){
         azro::Platform platform;
         azro::Window window("azro sandbox", 800, 800);
         azro::Quad quad1(vertices1);
-        azro::Triangle triangle(vertices2);
         
         while(!window.should_close()){
             window.poll_events();
             window.clear(250,250,250);
             quad1.draw();
-            triangle.draw();
             window.present();
         }
     }catch(const std::exception& e) {std::cerr << e.what() << "\n"; return 1;}

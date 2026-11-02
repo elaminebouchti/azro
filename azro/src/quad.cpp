@@ -45,6 +45,6 @@ azro::Quad::~Quad() = default;
 void azro::Quad::draw() const{
     impl_->program.use();
     impl_->vao.bind();
-    azro::gl::DrawElements(azro::gl::TRIANGLES, 6, azro::gl::UNSIGNED_INT, nullptr);
+    azro::gl::DrawElements(azro::gl::TRIANGLES, 3, azro::gl::UNSIGNED_INT, nullptr);
     azro::gl::check_error("after a Draw : ");
 }
