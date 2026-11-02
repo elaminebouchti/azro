@@ -33,15 +33,10 @@ struct azro::Triangle::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro
 
 azro::Triangle::Triangle(const std::array<float, 15>& vertices): impl_(new Impl{}){
     impl_->vao.bind();
-    impl_->vbo.upload(sizeof(vertices), &vertices);
+    impl_->vbo.upload(sizeof(vertices), vertices.data());
 
     impl_->vao.attribute(impl_->vbo, 0, 2, 5 * sizeof(float), 0);
     impl_->vao.attribute(impl_->vbo, 1, 3, 5 * sizeof(float), 2 * sizeof(float));
-    //azro::gl::VertexAttribPointer(0, 2, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), nullptr);
-    //azro::gl::VertexAttribPointer(1, 3, azro::gl::FLOAT, azro::gl::FALSE, static_cast<azro::gl::GLsizei>(5 * sizeof(float)), reinterpret_cast<const void*>(2*sizeof(float)));
-
-    //azro::gl::EnableVertexAttribArray(0);
-    //azro::gl::EnableVertexAttribArray(1);
 
     const char* VertexShadersSrc = R"(
     #version 330 core
