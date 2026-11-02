@@ -8,7 +8,6 @@
 namespace azro{
     namespace{
         unsigned int compile_shader(unsigned int type, const char* source){
-            azro::gl::GLuint shader = azro::gl::CreateShader(static_cast<azro::gl::GLuint>(type));
             azro::gl::ShaderSource(shader, 1, &source, nullptr);
             azro::gl::CompileShader(shader);
             azro::gl::GLint success = 0;
@@ -19,8 +18,7 @@ namespace azro{
                 std::string infoLog(log_length, '\0');
                 azro::gl::GetShaderInfoLog(shader, log_length, &log_length, infoLog.data());
                 infoLog.resize(log_length);
-                azro::gl::DeleteShader(shader);
-                throw std::runtime_error(std::string("Compilation failed : ") + infoLog);
+                throw std::runtime_error(std::string(type == azro::gl::VERTEX_SHADER ? "vertex" : "fragment") + " shader compilation failed : " + infoLog);
             }
             return static_cast<azro::gl::GLuint>(shader);
         }
