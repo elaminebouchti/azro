@@ -21,3 +21,8 @@ void azro::gl::VertexArray::attribute(const Buffer& vbo, GLuint index, GLint siz
     VertexAttribPointer(index, size, azro::gl::FLOAT, azro::gl::FALSE, stride, reinterpret_cast<const void*>(offset));
     EnableVertexAttribArray(index);
 }
+
+void azro::gl::VertexArray::index_buffer(const Buffer& ibo){
+    bind();
+    ibo.bind();
+}

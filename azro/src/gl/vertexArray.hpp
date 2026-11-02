@@ -20,6 +20,7 @@ namespace azro::gl{
 
         void bind() const;
         void attribute(const Buffer& vbo, GLuint index, GLint size, GLsizei stride, std::size_t offset);
+        void index_buffer(const Buffer& ibo);
         private:
         azro::gl::GLuint vao_ = 0;
     };

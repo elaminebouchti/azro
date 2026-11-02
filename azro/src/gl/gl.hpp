@@ -97,7 +97,6 @@ namespace azro::gl{
     using GetErrorFn = GLenum(*)(void);
     extern DrawArraysFn DrawArrays;
     extern GetErrorFn GetError;
-
     using DrawElementsFn = void(*)(GLenum, GLsizei, GLenum, const GLvoid*);
     extern DrawElementsFn DrawElements;
 

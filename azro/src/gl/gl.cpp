@@ -36,6 +36,7 @@ azro::gl::UseProgramFn azro::gl::UseProgram = nullptr;
 azro::gl::DeleteProgramFn azro::gl::DeleteProgram = nullptr;
 
 azro::gl::DrawArraysFn azro::gl::DrawArrays = nullptr;
+azro::gl::DrawElementsFn azro::gl::DrawElements = nullptr;
 azro::gl::GetErrorFn azro::gl::GetError = nullptr;
 
 namespace azro::gl{
@@ -87,7 +88,9 @@ void azro::gl::load_functions(){
     load(gl::DeleteProgram, "glDeleteProgram");
 
     load(gl::DrawArrays, "glDrawArrays");
+    load(gl::DrawElements, "glDrawElements");
     load(gl::GetError, "glGetError");
+
 }
 
 void azro::gl::print_info(){
