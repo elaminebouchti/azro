@@ -24,6 +24,7 @@ namespace azro{
         void main(){
             frag_color = u_color;
         })";
+        
         constexpr std::array<float, 8> Vertices = {0,0 ,1,0, 1,1, 0,1};
         constexpr std::array<unsigned int, 6> Indices = {0,1,2, 2,3,0};
         }

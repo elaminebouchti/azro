@@ -76,7 +76,7 @@ namespace azro::gl{
 
     void ShaderProgram::set_mat4(const char* name, const std::array<float, 16>& m){
         use();
-        UniformMatrix4fv(location(name), 1, gl::FALSE, m.data());
+        UniformMatrix4fv(location(name), 1, azro::gl::FALSE, m.data());
     }
 
     GLint ShaderProgram::location(const char* name) const{
