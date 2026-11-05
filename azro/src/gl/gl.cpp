@@ -7,7 +7,6 @@
 azro::gl::ClearFn azro::gl::Clear = nullptr;
 azro::gl::ClearColorFn azro::gl::ClearColor = nullptr;
 azro::gl::ViewportFn azro::gl::Viewport = nullptr;
-azro::gl::GetIntegervFn azro::gl::GetIntegerv = nullptr;
 azro::gl::GetStringFn azro::gl::GetString = nullptr;
 
 azro::gl::GenBuffersFn azro::gl::GenBuffers = nullptr;
@@ -64,7 +63,6 @@ void azro::gl::load_functions(){
     load(gl::Clear, "glClear");
     load(gl::ClearColor, "glClearColor");
     load(gl::Viewport, "glViewport");
-    load(gl::GetIntegerv, "glGetIntegerv");
     load(gl::GetString, "glGetString");
 
     load(gl::GenBuffers, "glGenBuffers");

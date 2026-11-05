@@ -1,4 +1,3 @@
-
 # a 2D engine for turn-based strategy and puzzle games, in c++20
 Requirement : Linux, a C++20 compiler(GCC13+), CMake 3.25+, Ninja, and SDL 3.4 built and installed.
 Build : 
