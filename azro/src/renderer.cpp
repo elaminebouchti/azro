@@ -29,6 +29,7 @@ namespace azro{
         constexpr std::array<unsigned int, 6> Indices = {0,1,2, 2,3,0};
     }
 }
+
 struct azro::Renderer::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro::gl::ARRAY_BUFFER}; azro::gl::ShaderProgram program{VertexShaderSrc, FragmnetShaderSrc};
                             azro::gl::Buffer ibo{azro::gl::ELEMENT_ARRAY_BUFFER}; std::array<float, 16> M;};
 
