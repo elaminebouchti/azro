@@ -31,6 +31,9 @@ namespace azro::gl{
     inline constexpr GLenum INFO_LOG_LENGTH = 0x8B84;
     inline constexpr GLenum NO_ERROR = 0;
     inline constexpr GLenum TRIANGLES = 0x0004;
+    inline constexpr GLenum ELEMENT_ARRAY_BUFFER = 0x8893;
+    inline constexpr GLenum UNSIGNED_INT = 0x1405;
+
 
     using ClearFn = void(*)(GLbitfield);
     using ClearColorFn = void(*)(GLfloat, GLfloat, GLfloat, GLfloat);
@@ -94,6 +97,14 @@ namespace azro::gl{
     using GetErrorFn = GLenum(*)(void);
     extern DrawArraysFn DrawArrays;
     extern GetErrorFn GetError;
+    using DrawElementsFn = void(*)(GLenum, GLsizei, GLenum, const GLvoid*);
+    extern DrawElementsFn DrawElements;
+    using GetUniformLocationFn = GLint(*)(GLuint, const GLchar*);
+    extern GetUniformLocationFn GetUniformLocation;
+    using Uniform4fFn = void(*)(GLint, GLfloat, GLfloat, GLfloat, GLfloat);
+    extern Uniform4fFn Uniform4f; 
+    using UniformMatrix4fvFn = void(*)(GLint, GLsizei, GLboolean, const GLfloat*);
+    extern UniformMatrix4fvFn UniformMatrix4fv;
 
     void load_functions();
     void print_info();

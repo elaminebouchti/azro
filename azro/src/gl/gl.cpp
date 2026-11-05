@@ -36,7 +36,12 @@ azro::gl::UseProgramFn azro::gl::UseProgram = nullptr;
 azro::gl::DeleteProgramFn azro::gl::DeleteProgram = nullptr;
 
 azro::gl::DrawArraysFn azro::gl::DrawArrays = nullptr;
+azro::gl::DrawElementsFn azro::gl::DrawElements = nullptr;
 azro::gl::GetErrorFn azro::gl::GetError = nullptr;
+
+azro::gl::GetUniformLocationFn azro::gl::GetUniformLocation = nullptr;
+azro::gl::Uniform4fFn azro::gl::Uniform4f = nullptr;
+azro::gl::UniformMatrix4fvFn azro::gl::UniformMatrix4fv = nullptr;
 
 namespace azro::gl{
     namespace {
@@ -87,7 +92,13 @@ void azro::gl::load_functions(){
     load(gl::DeleteProgram, "glDeleteProgram");
 
     load(gl::DrawArrays, "glDrawArrays");
+    load(gl::DrawElements, "glDrawElements");
     load(gl::GetError, "glGetError");
+
+    load(gl::GetUniformLocation, "glGetUniformLocation");
+    load(gl::Uniform4f, "glUniform4f");
+    load(gl::UniformMatrix4fv, "glUniformMatrix4fv");
+
 }
 
 void azro::gl::print_info(){
@@ -103,7 +114,7 @@ void azro::gl::print_info(){
 void azro::gl::check_error(const char* where){
     azro::gl::GLenum err;
     while((err = GetError()) != NO_ERROR){
-        std::cout <<"OpenGl Error " << where << "triggered Error code :" << std::hex << err << std::dec << "\n";
+        std::cout <<"OpenGl Error " << where << "triggered Error code : " << std::hex << "0x" << err << std::dec << "\n";
     }
 
 }
