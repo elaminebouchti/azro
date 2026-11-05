@@ -1,4 +1,4 @@
-#include "renderer.hpp"
+#include "azro/renderer.hpp"
 #include "gl/buffer.hpp"
 #include "gl/vertexArray.hpp"
 #include "gl/shaderProgram.hpp"
@@ -13,8 +13,8 @@ namespace azro{
         uniform mat4 u_projection;
         uniform vec4 u_rect;
         void main(){
-        vec2 pixel = u_rect.xy + a_pos * u_rect.zw
-        gl_Position;})";
+        vec2 pixel = u_rect.xy + a_pos * u_rect.zw;
+        gl_Position = u_projection * vec4(pixel, 0.0, 1.0);})";
 
         const char* const FragmenetShaderSrc = R"(
         #version 330 core
@@ -45,7 +45,7 @@ azro::Renderer::~Renderer() = default;
 
 void azro::Renderer::draw_rect(float x, float y, float w, float h, azro::Color color) const{
     impl_->program.set_vec4("u_rect", x, y, w, h);
-    impl_->program.set_vec4("u_color", color.r, color.g, color.b, 1.0f);
+    impl_->program.set_vec4("u_color", color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, 1.0f);
     impl_->vao.bind();
     azro::gl::DrawElements(azro::gl::TRIANGLES, 6, azro::gl::UNSIGNED_INT, nullptr);
 }
