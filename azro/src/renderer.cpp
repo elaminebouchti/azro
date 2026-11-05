@@ -30,7 +30,7 @@ namespace azro{
     }
 }
 
-struct azro::Renderer::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro::gl::ARRAY_BUFFER}; azro::gl::ShaderProgram program{VertexShaderSrc, FragmnetShaderSrc};
+struct azro::Renderer::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro::gl::ARRAY_BUFFER}; azro::gl::ShaderProgram program{VertexShaderSrc, FragmentShaderSrc};
                             azro::gl::Buffer ibo{azro::gl::ELEMENT_ARRAY_BUFFER}; std::array<float, 16> M;};
 
 azro::Renderer::Renderer(int width, int height): impl_(new azro::Renderer::Impl{}){
