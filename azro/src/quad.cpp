@@ -27,8 +27,8 @@ namespace azro{
         
         constexpr std::array<float, 8> Vertices = {0,0 ,1,0, 1,1, 0,1};
         constexpr std::array<unsigned int, 6> Indices = {0,1,2, 2,3,0};
-        }
     }
+}
 struct azro::Quad::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro::gl::ARRAY_BUFFER}; azro::gl::ShaderProgram program{VertexSrc, FragmentSrc};
                         azro::gl::Buffer ibo{azro::gl::ELEMENT_ARRAY_BUFFER}; std::array<float, 16> M;};
 
