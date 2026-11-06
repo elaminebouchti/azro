@@ -26,11 +26,11 @@ jobs:
         if: steps.sdl-cache.outputs.cache-hit != 'true'
         run: |
           git clone --depth 1 --branch release-3.4.8 https://github.com/libsdl-org/SDL.git sdl-src
-          cmake -S sdl-src -B sdl-build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/sdl3 -DSDL_TETS=OFF -DSDL_EXAMPLES=OFF
+          cmake -S sdl-src -B sdl-build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/sdl3 -DSDL_TESTS=OFF -DSDL_EXAMPLES=OFF
           cmake --build sdl-build
           cmake --install sdl-build
       - name: Configure
         run: |
-          cmake -S . -B build -G Ninja -DCMAKE_PREFIX_PATH=$HOME/.local -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_PREFIX_PATH=$HOME/sdl3
+          cmake -S . -B build -G Ninja -DCMAKE_PREFIX_PATH=$HOME/.local -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
       - name: Build
         run: cmake --build build
