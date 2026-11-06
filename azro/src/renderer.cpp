@@ -17,7 +17,7 @@ namespace azro{
         vec2 pixel = u_rect.xy + a_pos * u_rect.zw;
         gl_Position = u_projection * vec4(pixel, 0.0, 1.0);})";
 
-        const char* const FragmentShaderSrc = R"(
+        const char* const FragmnetShaderSrc = R"(
         #version 330 core
         uniform vec4 u_color;
         out vec4 frag_color;
