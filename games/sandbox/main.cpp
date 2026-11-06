@@ -7,7 +7,6 @@
 
 int main(){
     try{
-        int unused = 0;
         azro::Platform platform;
         azro::Window window("azro sandbox", 800, 800);
         azro::Renderer renderer(800,800);
