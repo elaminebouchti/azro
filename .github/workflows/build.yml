@@ -1,0 +1,36 @@
+name: build
+
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build
+      - name: Cache SDL3
+        uses: actions/cahce@v6
+        id: sdl-cache
+        with:
+          path: ~/sdl3
+          key: sdl3-3.4.8-${{ runner.os }}
+      - name: Build SDL3
+        if: steps.sdl-cache.outputs.cache-hit != 'true'
+        run: |
+          git clone --depth 1 --branch release-3.4.8 https://github.com/libsdl-org/SDL.git sdl-src
+          cmake -S sdl-src -B sdl-build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/sdl3 -DSDL_TETS=OFF -DSDL_EXAMPLES=OFF
+          cmake --build sdl-build
+          cmake --install sdl-build
+      - name: Configure
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_PREFIX_PATH=$HOME/.local -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_PREFIX_PATH=$HOME/sdl3
+      - name: Build
+        run: cmake --build build
