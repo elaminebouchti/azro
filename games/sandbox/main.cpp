@@ -2,34 +2,40 @@
 #include <azro/platform.hpp>
 #include <azro/window.hpp>
 #include <azro/renderer.hpp>
-#include <azro/frmae_timer.hpp>
+#include <azro/frame_timer.hpp>
 #include <array>
 
 
 int main(){
     try{
-        azro::FrameTimer timer(60);
-
         azro::Platform platform;
         azro::Window window("azro sandbox", 800, 800);
         azro::Renderer renderer(800,800);
 
-        float t = 0;
-        float speed = 0.1f;
         constexpr float Speed = 200.0f;
         constexpr float size = 100.0f;
         constexpr float Cell = 100.0f;
         constexpr azro::Color Light{235, 235, 210};
         constexpr azro::Color Dark{10, 10, 0};
-        float dt = 0.0f;
+                
 
+        float t = 0;
+        float speed = Speed;
+        float dt = 0.0f;
+        azro::FrameTimer timer(60);
         while(!window.should_close()){
             window.poll_events();
             window.clear(250, 250, 250);
-            
-            if(t <= 0.0f) speed += Speed;
-            if(t >= 800.0f - size) speed -= Speed;
+
             t += speed * dt;
+            if(t <= 0.0f){
+                t = 0.0f;
+                speed = Speed;
+            }
+            if(t >= 800.0f - size){
+                t = 800.0f - size;
+                speed = -Speed;
+            }
             float center_x = t + size / 2;
             float center_y = t + size / 2;
             int hl_col = static_cast<int>(center_x / Cell);

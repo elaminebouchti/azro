@@ -10,7 +10,7 @@ namespace azro{
 
         private:
         using Clock = std::chrono::steady_clock;
-        Clock::duration frmae_duration_;
+        Clock::duration frame_duration_;
         Clock::time_point last_;
         Clock::time_point next_;
     };
