@@ -21,7 +21,8 @@ float azro::FrameTimer::tick(){
     const auto now = Clock::now();
     if(next_ < now) next_ = now;
     std::this_thread::sleep_until(next_);
-    std::chrono::duration<float> dt = now - last_;
-    last_ = now;
+    const auto woke = Clock::now();
+    std::chrono::duration<float> dt = woke - last_;
+    last_ = woke;
     return std::min(dt.count(), azro::MaxDelta);
 }

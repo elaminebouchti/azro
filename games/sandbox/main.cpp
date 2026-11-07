@@ -3,7 +3,6 @@
 #include <azro/window.hpp>
 #include <azro/renderer.hpp>
 #include <azro/frame_timer.hpp>
-#include <array>
 
 
 int main(){
