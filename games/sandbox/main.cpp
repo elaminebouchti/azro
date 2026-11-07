@@ -30,7 +30,6 @@ int main(){
             if(t <= 0.0f) speed += Speed;
             if(t >= 800.0f - size) speed -= Speed;
             t += speed * dt;
-
             float center_x = t + size / 2;
             float center_y = t + size / 2;
             int hl_col = static_cast<int>(center_x / Cell);
@@ -50,7 +49,7 @@ int main(){
             renderer.draw_rect(t, t, size , size, {250, 0, 0});
 
             window.present();
-            
+
             dt = timer.tick();
         }
     }catch(const std::exception& e) {std::cerr << e.what() << "\n"; return 1;}
