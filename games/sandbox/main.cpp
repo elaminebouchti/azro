@@ -23,7 +23,7 @@ int main(){
         constexpr float Size  = 100.0f;
         constexpr float Cell  = 100.0f;
         constexpr azro::Color Light{235, 235, 210};
-        constexpr azro::Color Dark{10, 20, 0};
+        constexpr azro::Color Dark{10, 10, 0};
         constexpr azro::Color Red{255, 0, 0};
 
         constexpr float MaxX = Width  - Size;
