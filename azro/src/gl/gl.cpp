@@ -99,6 +99,14 @@ void azro::gl::load_functions(){
     load(gl::Uniform4f, "glUniform4f");
     load(gl::UniformMatrix4fv, "glUniformMatrix4fv");
 
+    load(gl::GenTextures, "glGenTextures");
+    load(gl::BindTexture, "glBindTexture");
+    load(gl::TexParameteri, "glTexParameteri");
+    load(gl::TexImage2D, "glTexImage2D");
+    load(gl::DeleteTextures, "glDeleteTextures");
+    load(gl::Enable, "glEnable");
+    load(gl::BlendFunc, "glBlendFunc");
+
 }
 
 void azro::gl::print_info(){
