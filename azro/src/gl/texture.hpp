@@ -23,7 +23,7 @@ namespace azro::gl{
         void bind() const;
 
         private:
-        azro::gl::GLuint id_;
+        azro::gl::GLuint id_ = 0;
         azro::gl::GLenum type_;
     }; 
 }
