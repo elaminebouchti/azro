@@ -50,8 +50,8 @@ azro::Renderer::~Renderer() = default;
 azro::Renderer::Renderer(azro::Renderer&&) noexcept = default;
 azro::Renderer& azro::Renderer::operator=(azro::Renderer&&) noexcept = default;
 
-void azro::Renderer::draw_rect(float x, float y, float w, float h, float alpha, azro::Color color) const{
-    const float c =std::cos(alpha), s = std::sin(alpha);
+void azro::Renderer::draw_rect(float x, float y, float w, float h,azro::Color color, float angle) const{
+    const float c = std::cos(angle), s = std::sin(angle);
     const float cx = x + 0.5f * w, cy = y + 0.5f * h;
     const std::array<float, 16> model = {
         w * c, w * s, 0, 0,

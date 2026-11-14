@@ -4,7 +4,6 @@
 #include <azro/window.hpp>
 #include <azro/renderer.hpp>
 #include <azro/frame_timer.hpp>
-#include <optional>
 
 
 struct Vec2 {
@@ -31,6 +30,7 @@ int main(){
         constexpr float MaxY = Height - Size;
 
         const float alpha = std::atan2(-200.0f, 300.0f);
+        float angle = 0.0f;
 
         Vec2 pos{0.0f, 200.0f};
         Vec2 vel{Speed * std::cos(alpha), Speed * std::sin(alpha)};
@@ -41,6 +41,7 @@ int main(){
             window.poll_events();
             window.clear(250, 250, 250);
 
+            angle += 3.0f * dt;
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
 
@@ -58,10 +59,10 @@ int main(){
                     const azro::Color c = (row + col) % 2 == 0 ? Light : Dark;
                     renderer.draw_rect(static_cast<float>(col) * Cell,
                                        static_cast<float>(row) * Cell,
-                                       Cell, Cell, 0, c);
+                                       Cell, Cell, c);
                 }
             }
-            renderer.draw_rect(pos.x, pos.y, Size, Size, 0, Red);
+            renderer.draw_rect(pos.x, pos.y, Size, Size, Red, angle);
 
             window.present();
         }
