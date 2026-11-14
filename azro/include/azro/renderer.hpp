@@ -16,7 +16,7 @@ namespace azro{
         Renderer(const Renderer&) = delete;
         Renderer& operator=(const Renderer&) = delete;
 
-        void  draw_rect(float x, float y, float w, float h, Color color) const;
+        void  draw_rect(float x, float y, float w, float h, float alpha, Color color) const;
         private:
         struct Impl;
         std::unique_ptr<Impl> impl_; 
