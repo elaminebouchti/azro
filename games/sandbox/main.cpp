@@ -24,7 +24,7 @@ int main(){
         constexpr float Cell  = 100.0f;
         constexpr azro::Color Light{235, 235, 210};
         constexpr azro::Color Dark{10, 10, 0};
-        constexpr azro::Color Red{255, 0, 0};
+        //constexpr azro::Color Red{255, 0, 0};
 
         constexpr float MaxX = Width  - Size;
         constexpr float MaxY = Height - Size;
@@ -34,14 +34,15 @@ int main(){
 
         Vec2 pos{0.0f, 200.0f};
         Vec2 vel{Speed * std::cos(alpha), Speed * std::sin(alpha)};
+        std::string path = std::string(AZRO_ASSETS_DIR) + "f.png";
+        const azro::TextureId f = renderer.load_texture(path.c_str());
+        
 
         azro::FrameTimer timer(60);
         while (!window.should_close()) {
             const float dt = timer.tick();
             window.poll_events();
             window.clear(250, 250, 250);
-
-            angle += 3.0f * dt;
             pos.x += vel.x * dt;
             pos.y += vel.y * dt;
 
@@ -62,7 +63,8 @@ int main(){
                                        Cell, Cell, c);
                 }
             }
-            renderer.draw_rect(pos.x, pos.y, Size, Size, Red, angle);
+            renderer.draw_sprite(f, pos.x, pos.y, Size, Size, angle);
+            //renderer.draw_rect(pos.x, pos.y, Size, Size, Red, angle);
 
             window.present();
         }
