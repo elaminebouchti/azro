@@ -4,12 +4,14 @@
 #include <azro/window.hpp>
 #include <azro/renderer.hpp>
 #include <azro/frame_timer.hpp>
+#include <optional>
+
 
 struct Vec2 {
     float x, y;
 };
 
-int main() {
+int main(){
     try {
         constexpr float Width  = 800.0f;
         constexpr float Height = 800.0f;
