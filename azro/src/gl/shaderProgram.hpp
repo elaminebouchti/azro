@@ -17,13 +17,14 @@ namespace azro::gl{
             return *this;
         }
         void use() const;
-        void set_vec4(const char* name, float x, float y, float z, float w);
-        void set_mat4(const char* name, const std::array<float, 16>& m);
+        void set_vec4(GLint location, float x, float y, float z, float w) const;
+        void set_mat4(GLint location, const std::array<float, 16>& m) const;
+
+        GLint uniform_location(const char* name) const;
 
         private:
-        azro::gl::GLuint program_ = 0;
+        GLuint program_ = 0;
         ShaderProgram(): program_(CreateProgram()){};
-        GLint location(const char* name) const;
 
     };
 }

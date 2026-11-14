@@ -32,11 +32,13 @@ namespace azro{
 }
 
 struct azro::Renderer::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro::gl::ARRAY_BUFFER}; azro::gl::ShaderProgram program{VertexShaderSrc, FragmentShaderSrc};
-                            azro::gl::Buffer ibo{azro::gl::ELEMENT_ARRAY_BUFFER}; std::array<float, 16> M;};
+                            azro::gl::Buffer ibo{azro::gl::ELEMENT_ARRAY_BUFFER}; std::array<float, 16> M;
+                            azro::gl::GLint u_color = program.uniform_location("u_color"); azro::gl::GLint u_projection = program.uniform_location("u_projection");
+                            azro::gl::GLint u_model = program.uniform_location("u_model");};
 
 azro::Renderer::Renderer(int width, int height): impl_(new azro::Renderer::Impl{}){
     impl_->M = {2/static_cast<float>(width), 0, 0, 0, 0, -2/static_cast<float>(height), 0, 0, 0, 0, 1, 0, -1, 1, 0, 1};
-    impl_->program.set_mat4("u_projection", impl_->M);
+    impl_->program.set_mat4(impl_->u_projection, impl_->M);
 
     impl_->vbo.upload(sizeof(azro::Vertices), azro::Vertices.data());
     impl_->vao.index_buffer(impl_->ibo);
@@ -55,8 +57,8 @@ void azro::Renderer::draw_rect(float x, float y, float w, float h, float alpha, 
        0     ,     0, 1, 0,
        cx,        cy, 0, 1 
     };
-    impl_->program.set_mat4("u_model", model);
-    impl_->program.set_vec4("u_color", color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, 1.0f);
+    impl_->program.set_mat4(impl_->u_model, model);
+    impl_->program.set_vec4(impl_->u_color, color.r / 255.0f, color.g / 255.0f, color.b / 255.0f, 1.0f);
     impl_->vao.bind();
     azro::gl::DrawElements(azro::gl::TRIANGLES, 6, azro::gl::UNSIGNED_INT, nullptr);
     azro::gl::check_error("error in Draw : ");
