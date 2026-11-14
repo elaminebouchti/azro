@@ -47,8 +47,8 @@ azro::Renderer::Renderer(int width, int height): impl_(new azro::Renderer::Impl{
     }
 
 azro::Renderer::~Renderer() = default;
-azro::Renderer::Renderer(azro::Renderer&&) = default;
-azro::Renderer& azro::Renderer::operator=(azro::Renderer&&) = default;
+azro::Renderer::Renderer(azro::Renderer&&) noexcept = default;
+azro::Renderer& azro::Renderer::operator=(azro::Renderer&&) noexcept = default;
 
 void azro::Renderer::draw_rect(float x, float y, float w, float h, float alpha, azro::Color color) const{
     const float c =std::cos(alpha), s = std::sin(alpha);

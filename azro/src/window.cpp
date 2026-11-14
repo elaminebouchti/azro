@@ -67,7 +67,7 @@ void azro::Window::present(){
         float elapsed_sec = static_cast<float>(current_time - last_time_) / 1000.0f;
         float fps = static_cast<float>(frame_count_) / elapsed_sec;
 
-        std::string title = "azro Engine | FPS: " + std::to_string(static_cast<int>(fps));
+        std::string title = "azro Engine | FPS :  " + std::to_string(static_cast<int>(fps));
         // reset for the next second
         SDL_SetWindowTitle(window_.get(), title.c_str());
         frame_count_ = 0;
