@@ -15,8 +15,10 @@ namespace azro{
         ~Renderer();
         Renderer(const Renderer&) = delete;
         Renderer& operator=(const Renderer&) = delete;
-
-        void  draw_rect(float x, float y, float w, float h, Color color) const;
+        Renderer(Renderer&&) noexcept;
+        Renderer& operator=(Renderer&&) noexcept;
+        // angle in radians and the positive turns clockwise on screen (y points down)
+        void  draw_rect(float x, float y, float w, float h,Color color, float angle = 0.0f) const;
         private:
         struct Impl;
         std::unique_ptr<Impl> impl_; 

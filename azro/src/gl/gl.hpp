@@ -109,5 +109,4 @@ namespace azro::gl{
     void load_functions();
     void print_info();
     void check_error(const char* where);
-
 }

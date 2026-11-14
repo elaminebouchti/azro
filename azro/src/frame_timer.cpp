@@ -13,7 +13,7 @@ azro::FrameTimer::FrameTimer(int target_fps){
     if(target_fps <= 0) throw std::invalid_argument("the target fps cannot be smaller or equal to zero");
     frame_duration_ = std::chrono::nanoseconds(1'000'000'000LL / target_fps);
     last_ = Clock::now();
-    next_ = Clock::now();
+    next_ = last_;
 }
 
 float azro::FrameTimer::tick(){

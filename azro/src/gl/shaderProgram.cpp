@@ -69,17 +69,17 @@ namespace azro::gl{
         UseProgram(program_);
     }
 
-    void ShaderProgram::set_vec4(const char* name, float x, float y, float z, float w){
+    void ShaderProgram::set_vec4(GLint location, float x, float y, float z, float w) const{
         use();
-        Uniform4f(location(name), x, y, z, w);
+        Uniform4f(location, x, y, z, w);
     }
 
-    void ShaderProgram::set_mat4(const char* name, const std::array<float, 16>& m){
+    void ShaderProgram::set_mat4(GLint location, const std::array<float, 16>& m) const{
         use();
-        UniformMatrix4fv(location(name), 1, azro::gl::FALSE, m.data());
+        UniformMatrix4fv(location, 1, azro::gl::FALSE, m.data());
     }
 
-    GLint ShaderProgram::location(const char* name) const{
+    GLint ShaderProgram::uniform_location(const char* name) const{
         GLint uniform_found = GetUniformLocation(program_, name);
         if(uniform_found == -1) throw std::runtime_error(std::string("uniform not found : ") + name);
         return uniform_found;
