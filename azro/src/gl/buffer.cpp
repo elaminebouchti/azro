@@ -10,9 +10,9 @@ azro::gl::Buffer::~Buffer(){
         azro::gl::DeleteBuffers(1, &vbo_);
     }
 }
-void azro::gl::Buffer::upload(GLsizeiptr size, const GLvoid* data){
+void azro::gl::Buffer::upload(GLsizeiptr size, const GLvoid* data, GLenum usage){
     bind();
-    BufferData(type_, size, data, STATIC_DRAW);
+    BufferData(type_, size, data, usage);
 }
 void azro::gl::Buffer::bind() const{
     BindBuffer(type_, vbo_);

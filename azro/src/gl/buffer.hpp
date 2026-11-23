@@ -17,7 +17,7 @@ namespace azro::gl{
             return *this;  
         }
 
-        void upload(GLsizeiptr size, const GLvoid* data);
+        void upload(GLsizeiptr size, const GLvoid* data, GLenum usage = STATIC_DRAW);
         void bind() const;
 
 
