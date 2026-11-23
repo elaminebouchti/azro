@@ -33,6 +33,21 @@ namespace azro::gl{
     inline constexpr GLenum TRIANGLES = 0x0004;
     inline constexpr GLenum ELEMENT_ARRAY_BUFFER = 0x8893;
     inline constexpr GLenum UNSIGNED_INT = 0x1405;
+    inline constexpr GLenum TEXTURE_2D = 0x0DE1;
+    inline constexpr GLenum TEXTURE_MIN_FILTER = 0x2801;
+    inline constexpr GLenum TEXTURE_MAG_FILTER = 0x2800;
+    inline constexpr GLenum TEXTURE_WRAP_S = 0x2802;
+    inline constexpr GLenum TEXTURE_WRAP_T = 0x2803;
+    inline constexpr GLenum TEXTURE_NEAREST = 0x2600;
+    inline constexpr GLenum TEXTURE_LINEAR = 0x2601;
+    inline constexpr GLenum TEXTURE_RGBA = 0x1908;
+    inline constexpr GLenum TEXTURE_RGBA8 = 0x8058;
+    inline constexpr GLenum UNSIGNED_BYTE = 0x1401;
+    inline constexpr GLenum BLEND = 0x0BE2;
+    inline constexpr GLenum SRC_ALPHA = 0x0302;
+    inline constexpr GLenum ONE_MINUS_SRC_ALPHA = 0x0303;
+    inline constexpr GLenum CLAMP_TO_EDGE = 0x812F;
+
 
 
     using ClearFn = void(*)(GLbitfield);
@@ -94,8 +109,8 @@ namespace azro::gl{
     extern DeleteProgramFn DeleteProgram;
 
     using DrawArraysFn = void(*)(GLenum, GLint, GLsizei);
-    using GetErrorFn = GLenum(*)(void);
     extern DrawArraysFn DrawArrays;
+    using GetErrorFn = GLenum(*)(void);
     extern GetErrorFn GetError;
     using DrawElementsFn = void(*)(GLenum, GLsizei, GLenum, const GLvoid*);
     extern DrawElementsFn DrawElements;
@@ -105,6 +120,21 @@ namespace azro::gl{
     extern Uniform4fFn Uniform4f; 
     using UniformMatrix4fvFn = void(*)(GLint, GLsizei, GLboolean, const GLfloat*);
     extern UniformMatrix4fvFn UniformMatrix4fv;
+
+    using GenTexturesFn = void(*)(GLsizei, GLuint*);
+    extern GenTexturesFn GenTextures;
+    using BindTextureFn = void(*)(GLenum, GLuint);
+    extern BindTextureFn BindTexture;
+    using TexParameteriFn = void(*)(GLenum, GLenum, GLint);
+    extern TexParameteriFn TexParameteri;
+    using TexImage2DFn = void(*)(GLenum, GLint, GLint, GLsizei, GLsizei, GLint, GLenum, GLenum, const GLvoid*);
+    extern TexImage2DFn TexImage2D;
+    using DeleteTexturesFn = void(*)(GLsizei, const GLuint*);
+    extern DeleteTexturesFn DeleteTextures;
+    using EnableFn = void(*)(GLenum);
+    extern EnableFn Enable;
+    using BlendFuncFn = void(*)(GLenum, GLenum);
+    extern BlendFuncFn BlendFunc;
 
     void load_functions();
     void print_info();

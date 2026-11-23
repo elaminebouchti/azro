@@ -8,6 +8,7 @@ namespace azro{
         std::uint8_t r, g, b; 
     };
 
+    struct TextureId{ std::uint32_t index;};
 
     class Renderer{
         public:
@@ -17,8 +18,12 @@ namespace azro{
         Renderer& operator=(const Renderer&) = delete;
         Renderer(Renderer&&) noexcept;
         Renderer& operator=(Renderer&&) noexcept;
+        
+        TextureId load_texture(const char*path);
+        void draw_sprite(TextureId texture, float x, float y, float w, float h, float angle = 0.0f) const;
         // angle in radians and the positive turns clockwise on screen (y points down)
-        void  draw_rect(float x, float y, float w, float h,Color color, float angle = 0.0f) const;
+        void  draw_rect(float x, float y, float w, float h, Color color, float angle = 0.0f) const;
+
         private:
         struct Impl;
         std::unique_ptr<Impl> impl_; 

@@ -43,6 +43,14 @@ azro::gl::GetUniformLocationFn azro::gl::GetUniformLocation = nullptr;
 azro::gl::Uniform4fFn azro::gl::Uniform4f = nullptr;
 azro::gl::UniformMatrix4fvFn azro::gl::UniformMatrix4fv = nullptr;
 
+azro::gl::GenTexturesFn azro::gl::GenTextures = nullptr;
+azro::gl::BindTextureFn azro::gl::BindTexture = nullptr;
+azro::gl::TexParameteriFn azro::gl::TexParameteri = nullptr;
+azro::gl::TexImage2DFn azro::gl::TexImage2D = nullptr;
+azro::gl::DeleteTexturesFn azro::gl::DeleteTextures = nullptr;
+azro::gl::EnableFn azro::gl::Enable = nullptr;
+azro::gl::BlendFuncFn azro::gl::BlendFunc = nullptr;
+
 namespace azro::gl{
     namespace {
     const char* or_unknown(const char* text){
@@ -98,6 +106,14 @@ void azro::gl::load_functions(){
     load(gl::GetUniformLocation, "glGetUniformLocation");
     load(gl::Uniform4f, "glUniform4f");
     load(gl::UniformMatrix4fv, "glUniformMatrix4fv");
+
+    load(gl::GenTextures, "glGenTextures");
+    load(gl::BindTexture, "glBindTexture");
+    load(gl::TexParameteri, "glTexParameteri");
+    load(gl::TexImage2D, "glTexImage2D");
+    load(gl::DeleteTextures, "glDeleteTextures");
+    load(gl::Enable, "glEnable");
+    load(gl::BlendFunc, "glBlendFunc");
 
 }
 
