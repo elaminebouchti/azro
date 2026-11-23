@@ -63,7 +63,7 @@ int main(){
                 }
             }
             renderer.draw_sprite(f, pos.x, pos.y, Size, Size, angle);
-
+            renderer.flush();
             window.present();
         }
     } catch (const std::exception& e) {
