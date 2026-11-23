@@ -47,6 +47,8 @@ namespace azro::gl{
     inline constexpr GLenum SRC_ALPHA = 0x0302;
     inline constexpr GLenum ONE_MINUS_SRC_ALPHA = 0x0303;
     inline constexpr GLenum CLAMP_TO_EDGE = 0x812F;
+    inline constexpr GLenum DYNAMIC_DRAW = 0x88E8;
+
 
 
 

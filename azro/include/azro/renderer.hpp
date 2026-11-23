@@ -20,9 +20,11 @@ namespace azro{
         Renderer& operator=(Renderer&&) noexcept;
         
         TextureId load_texture(const char*path);
-        void draw_sprite(TextureId texture, float x, float y, float w, float h, float angle = 0.0f) const;
+        void draw_sprite(TextureId texture, float x, float y, float w, float h, float angle = 0.0f);
         // angle in radians and the positive turns clockwise on screen (y points down)
-        void  draw_rect(float x, float y, float w, float h, Color color, float angle = 0.0f) const;
+        void  draw_rect(float x, float y, float w, float h, Color color, float angle = 0.0f);
+        void flush();
+        std::uint32_t take_draw_calls();
 
         private:
         struct Impl;
