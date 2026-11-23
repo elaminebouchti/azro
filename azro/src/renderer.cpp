@@ -12,6 +12,8 @@
 
 namespace azro{
     namespace{
+        using SurfacePtr = std::unique_ptr<SDL_Surface, decltype(&SDL_DestroySurface)>;
+
         const char* const VertexShaderSrc = R"(
         #version 330 core
         layout(location = 0) in vec2 a_pos;
@@ -98,17 +100,15 @@ void azro::Renderer::draw_rect(float x, float y, float w, float h,azro::Color co
 }
 
 azro::TextureId azro::Renderer::load_texture(const char* path){
-    SDL_Surface* surface = SDL_LoadPNG(path);
-    if(!surface) throw std::runtime_error(std::string("surface cannot be loaded : " ) + SDL_GetError());
-    SDL_Surface* converted = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
+    SurfacePtr loaded(SDL_LoadPNG(path), SDL_DestroySurface);
+    if(!loaded) throw std::runtime_error(std::string("surface cannot be loaded : " ) + SDL_GetError());
+    SurfacePtr converted(SDL_ConvertSurface(loaded.get(), SDL_PIXELFORMAT_RGBA32), SDL_DestroySurface);
     if(!converted) throw std::runtime_error(std::string("surface conversion failed : ") + SDL_GetError());
     if(converted->pitch != converted->w * 4){
-        SDL_DestroySurface(converted);
         throw std::runtime_error(std::string("surface pitch is empty : "));
     }
-    impl_->textures.emplace_back(surface->w, surface->h, surface->pixels);
-    SDL_DestroySurface(converted);
-    SDL_DestroySurface(surface);
+    impl_->textures.emplace_back(converted->w, converted->h, converted->pixels);
+
     return TextureId{static_cast<std::uint32_t>(impl_->textures.size() - 1)};
 }
 
