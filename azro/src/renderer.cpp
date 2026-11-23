@@ -4,7 +4,7 @@
 #include "gl/shaderProgram.hpp"
 #include "gl/gl.hpp"
 #include "gl/texture.hpp"
-#include "SDL3/SDL.h"
+#include <SDL3/SDL.h>
 #include <array>
 #include <cmath>
 #include <vector>
@@ -74,7 +74,7 @@ struct azro::Renderer::Impl{azro::gl::VertexArray vao; azro::gl::Buffer vbo{azro
 azro::Renderer::Renderer(int width, int height): impl_(new azro::Renderer::Impl{}){
     impl_->M = {2/static_cast<float>(width), 0, 0, 0, 0, -2/static_cast<float>(height), 0, 0, 0, 0, 1, 0, -1, 1, 0, 1};
     impl_->program.set_mat4(impl_->u_projection, impl_->M);
-    impl_->sprite_program.set_mat4(impl_->u_projection, impl_->M);
+    impl_->sprite_program.set_mat4(impl_->sprite_u_projection, impl_->M);
     azro::gl::Enable(azro::gl::BLEND);
     azro::gl::BlendFunc(azro::gl::SRC_ALPHA, azro::gl::ONE_MINUS_SRC_ALPHA);
 
@@ -102,21 +102,22 @@ azro::TextureId azro::Renderer::load_texture(const char* path){
     if(!surface) throw std::runtime_error(std::string("surface cannot be loaded : " ) + SDL_GetError());
     SDL_Surface* converted = SDL_ConvertSurface(surface, SDL_PIXELFORMAT_RGBA32);
     if(!converted) throw std::runtime_error(std::string("surface conversion failed : ") + SDL_GetError());
-    if(!surface->pitch) {
+    if(converted->pitch != converted->w * 4){
         SDL_DestroySurface(converted);
         throw std::runtime_error(std::string("surface pitch is empty : "));
     }
     impl_->textures.emplace_back(surface->w, surface->h, surface->pixels);
     SDL_DestroySurface(converted);
+    SDL_DestroySurface(surface);
     return TextureId{static_cast<std::uint32_t>(impl_->textures.size() - 1)};
 }
 
 void azro::Renderer::draw_sprite(TextureId texture, float x, float y, float w, float h, float angle) const{
-    impl_->textures.at(texture.index);
+    const auto& tex = impl_->textures.at(texture.index);
     const std::array<float, 16> model = model_matrix(x, y, w, h, angle);
     impl_->sprite_program.set_mat4(impl_->sprite_u_model, model);
-    impl_->textures[texture.index].bind();
+    tex.bind();
     impl_->vao.bind();
     azro::gl::DrawElements(azro::gl::TRIANGLES, 6, azro::gl::UNSIGNED_INT, nullptr);
-    azro::gl::check_error("error in Draw Sprite");
+    azro::gl::check_error("error in Draw Sprite : ");
 }

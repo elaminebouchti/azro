@@ -2,7 +2,7 @@
 
 
 
-azro::gl::Texture::Texture(int width, int height, const void* rgba_pixels): type_(TEXTURE_2D){
+azro::gl::Texture::Texture(int width, int height, const void* rgba_pixels){
     azro::gl::GenTextures(1 , &id_);
     azro::gl::BindTexture(TEXTURE_2D, id_);
     azro::gl::TexParameteri(TEXTURE_2D, TEXTURE_MIN_FILTER, TEXTURE_NEAREST);
@@ -20,5 +20,5 @@ azro::gl::Texture::~Texture(){
 }
 
 void azro::gl::Texture::bind() const{
-    azro::gl::BindTexture(type_, id_);
+    azro::gl::BindTexture(TEXTURE_2D, id_);
 }
