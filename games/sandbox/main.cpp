@@ -33,7 +33,7 @@ int main(){
 
         Vec2 pos{0.0f, 200.0f};
         Vec2 vel{Speed * std::cos(alpha), Speed * std::sin(alpha)};
-        std::string path = std::string(AZRO_ASSETS_DIR) + "f_rgb.png";
+        std::string path = std::string(AZRO_ASSETS_DIR) + "f.png";
         const azro::TextureId f = renderer.load_texture(path.c_str());
         
 
