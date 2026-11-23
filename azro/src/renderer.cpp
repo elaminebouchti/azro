@@ -105,7 +105,7 @@ azro::TextureId azro::Renderer::load_texture(const char* path){
     SurfacePtr converted(SDL_ConvertSurface(loaded.get(), SDL_PIXELFORMAT_RGBA32), SDL_DestroySurface);
     if(!converted) throw std::runtime_error(std::string("surface conversion failed : ") + SDL_GetError());
     if(converted->pitch != converted->w * 4){
-        throw std::runtime_error(std::string("surface pitch is empty : "));
+        throw std::runtime_error(std::string("unexpected row padding (pitch != width * 4)"));
     }
     impl_->textures.emplace_back(converted->w, converted->h, converted->pixels);
 
